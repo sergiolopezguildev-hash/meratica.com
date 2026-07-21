@@ -1,22 +1,15 @@
-# Assets estáticos tras `zola build` (Workers / Wrangler).
-# NO uses `pages_build_output_dir` aquí: provoca `wrangler deploy` en modo Pages incorrecto.
+# Cloudflare Workers + assets estáticos (flujo oficial Zola)
+# https://www.getzola.org/documentation/deployment/cloudflare-workers/
 #
-# En Cloudflare → Settings → Build:
-#   Build command:
-#     if [ "$CF_PAGES_BRANCH" = "main" ] || [ "$CF_PAGES_BRANCH" = "" ]; then
-#       zola build
-#     else
-#       zola build --base-url "$CF_PAGES_URL"
-#     fi
-#   Deploy command:  (vacío en Pages clásico)
-#     o, si el proyecto es Workers: npx wrangler deploy
-#   Build output directory (Pages): public
-#   Env: ZOLA_VERSION=0.22.1
-#
-# Importante: el Build command DEBE ser `zola build`, nunca solo `npx wrangler deploy`.
+# En el dashboard puedes dejar el deploy command por defecto:
+#   npx wrangler deploy
+# Wrangler ejecutará [build] → build.sh → zola build → sube ./public
 
 name = "meratica"
 compatibility_date = "2026-01-01"
+
+[build]
+command = "bash ./build.sh"
 
 [assets]
 directory = "./public"

@@ -1,78 +1,51 @@
-# Despliegue en Cloudflare Pages
+# Despliegue en Cloudflare Workers (sitio estático Zola)
 
-El HTML **no** se sube al repositorio. Cloudflare debe ejecutar **`zola build`** y publicar `public/`.
+Este proyecto usa el flujo oficial de Zola + Workers:
 
-## Error frecuente: `npx wrangler deploy`
+1. Cloudflare ejecuta `npx wrangler deploy`
+2. Wrangler lanza `build.sh` (`[build]` en `wrangler.toml`)
+3. El script instala Zola si hace falta y genera `public/`
+4. Wrangler publica `[assets] directory = "./public"`
 
-Si el log muestra:
+## Archivos clave
 
-```text
-Executing user deploy command: npx wrangler deploy
-```
-
-el proyecto está mal configurado: Wrangler intenta subir un Worker/assets **sin haber compilado Zola**.
-
-### Ajuste correcto (Pages → Connect to Git)
-
-En **Settings → Builds**:
-
-| Campo | Valor |
+| Fichero | Rol |
 | --- | --- |
-| Framework preset | **Zola** o **None** |
-| Build command | ver abajo |
-| Build output directory | `public` |
-| Deploy command | **vacío** (no `npx wrangler deploy`) |
-| Root directory | `/` |
-| Production branch | `main` |
+| `build.sh` | Descarga Zola y ejecuta `zola build` |
+| `wrangler.toml` | `[build]` + `[assets]` |
+| `zola.toml` | Config del sitio (no `config.toml`, evita confusión con Hugo) |
 
-### Build command
+## Dashboard
+
+1. **Workers & Pages → Create →** conecta el repo (Workers está bien con este setup).
+2. Deja el deploy command: `npx wrangler deploy` (por defecto).
+3. Opcional: env `ZOLA_VERSION=0.22.1`.
+
+No hace falta un Build command aparte: el build va dentro de Wrangler.
+
+## Local
 
 ```bash
-if [ "$CF_PAGES_BRANCH" = "main" ]; then zola build; else zola build --base-url $CF_PAGES_URL; fi
+# Windows: usa Git Bash, WSL o zola directamente
+zola build
+npx wrangler deploy   # requiere login en Cloudflare
 ```
 
-### Variable de entorno
+O solo:
 
-| Nombre | Valor |
-| --- | --- |
-| `ZOLA_VERSION` | `0.22.1` |
-
-Guarda y lanza **Retry deployment**.
-
-## Conflicto Hugo / Zola
-
-El repo usa `zola.toml` (no `config.toml`) para que el detector no confunda el sitio con Hugo.
-
-## Flujo
-
-```text
-Editar Markdown → git push → Cloudflare → zola build → public/ → sitio publicado
+```bash
+zola serve
 ```
-
-## Crear el proyecto desde cero
-
-1. [Cloudflare Dashboard](https://dash.cloudflare.com/) → **Workers & Pages** → **Create** → **Pages** → **Connect to Git**.
-2. Elige el repo `meratica.com`.
-3. Aplica la tabla de arriba (Build command = `zola build`, output = `public`).
-4. **No** elijas el flujo que deja como único comando `npx wrangler deploy`.
-
-Si ya creaste un Worker por error, borra ese proyecto y crea uno nuevo tipo **Pages**, o cambia Builds a la configuración de esta guía.
-
-## wrangler.toml
-
-Hay un `wrangler.toml` con `[assets] directory = "./public"` por si usas Wrangler en local tras `zola build`. En Pages con Git, lo importante es el **Build command** del dashboard.
 
 ## Dominio
 
-1. Custom domains en el proyecto Pages.
-2. Actualiza `base_url` en `zola.toml`.
-3. Descomenta HSTS en `static/_headers` cuando el HTTPS sea estable.
+Custom domains en el Worker → actualiza `base_url` en `zola.toml`.
 
 ## Troubleshooting
 
 | Síntoma | Qué revisar |
 | --- | --- |
-| `npx wrangler deploy` / Missing entry-point | Build command = `zola build`; Deploy vacío; output `public` |
-| Multiple frameworks Hugo, Zola | Mantén `zola.toml`, no `config.toml` |
-| 404 en CSS (previews) | Build command con `--base-url $CF_PAGES_URL` |
-| `zola: not found` | `ZOLA_VERSION=0.22.1` |
+| `public` does not exist | Falta `[build]` / `build.sh` o el script falló |
+| Multiple frameworks Hugo, Zola | Mantén `zola.toml` |
+| CSS rotos en preview | `CF_PAGES_URL` en `build.sh` |
+| Permiso denegado en `build.sh` | El script se invoca con `bash ./build.sh` |

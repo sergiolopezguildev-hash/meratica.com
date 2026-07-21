@@ -147,23 +147,16 @@ Preferencia AVIF → WebP → JPG/PNG. Shortcode:
 - `extra.enable_*` — interruptores de UI
 - `taxonomies` — categories / tags
 
-## Despliegue (Cloudflare Pages)
+## Despliegue (Cloudflare Workers)
 
 Guía completa: [docs/cloudflare.md](docs/cloudflare.md).
 
-Resumen:
+Resumen (flujo oficial Zola):
 
-1. Conecta el repo como proyecto **Pages** (no como Worker con solo Wrangler).
-2. Build command:
-
-   ```bash
-   if [ "$CF_PAGES_BRANCH" = "main" ]; then zola build; else zola build --base-url $CF_PAGES_URL; fi
-   ```
-
-3. Output directory: `public`
-4. Deploy command: **vacío** (no uses `npx wrangler deploy`)
-5. Env: `ZOLA_VERSION=0.22.1`
-6. Production branch: `main`
+1. Conecta el repo en Cloudflare (Workers/Pages).
+2. Deploy command por defecto: `npx wrangler deploy`
+3. Wrangler ejecuta `build.sh` → `zola build` → publica `public/`
+4. Opcional: env `ZOLA_VERSION=0.22.1`
 
 No subas `public/` a Git.
 
