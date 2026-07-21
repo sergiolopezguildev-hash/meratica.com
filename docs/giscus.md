@@ -58,7 +58,7 @@ mapping = "pathname"
 reactions_enabled = "1"
 emit_metadata = "0"
 input_position = "top"
-theme = "preferred_color_scheme"
+theme = "gruvbox"
 lang = "es"
 loading = "lazy"
 ```
