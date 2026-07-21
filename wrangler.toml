@@ -1,13 +1,23 @@
-# Cloudflare Pages / Wrangler — configuración explícita (evita autoconfig Hugo vs Zola)
-# https://developers.cloudflare.com/pages/functions/wrangler-configuration/
+# Assets estáticos tras `zola build` (Workers / Wrangler).
+# NO uses `pages_build_output_dir` aquí: provoca `wrangler deploy` en modo Pages incorrecto.
+#
+# En Cloudflare → Settings → Build:
+#   Build command:
+#     if [ "$CF_PAGES_BRANCH" = "main" ] || [ "$CF_PAGES_BRANCH" = "" ]; then
+#       zola build
+#     else
+#       zola build --base-url "$CF_PAGES_URL"
+#     fi
+#   Deploy command:  (vacío en Pages clásico)
+#     o, si el proyecto es Workers: npx wrangler deploy
+#   Build output directory (Pages): public
+#   Env: ZOLA_VERSION=0.22.1
+#
+# Importante: el Build command DEBE ser `zola build`, nunca solo `npx wrangler deploy`.
 
 name = "meratica"
 compatibility_date = "2026-01-01"
-pages_build_output_dir = "./public"
 
-# En el dashboard de Pages (Settings → Builds):
-#   Build command:
-#     if [ "$CF_PAGES_BRANCH" = "main" ]; then zola build; else zola build --base-url $CF_PAGES_URL; fi
-#   Build output directory: public
-#   Framework preset: Zola (o None si defines el comando a mano)
-#   Env: ZOLA_VERSION=0.22.1
+[assets]
+directory = "./public"
+not_found_handling = "404-page"

@@ -153,7 +153,7 @@ Guía completa: [docs/cloudflare.md](docs/cloudflare.md).
 
 Resumen:
 
-1. Conecta el repo en Cloudflare Pages.
+1. Conecta el repo como proyecto **Pages** (no como Worker con solo Wrangler).
 2. Build command:
 
    ```bash
@@ -161,8 +161,9 @@ Resumen:
    ```
 
 3. Output directory: `public`
-4. Env: `ZOLA_VERSION=0.22.1`
-5. Production branch: `main`
+4. Deploy command: **vacío** (no uses `npx wrangler deploy`)
+5. Env: `ZOLA_VERSION=0.22.1`
+6. Production branch: `main`
 
 No subas `public/` a Git.
 

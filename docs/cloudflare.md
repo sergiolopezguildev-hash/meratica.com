@@ -1,36 +1,31 @@
 # Despliegue en Cloudflare Pages
 
-El HTML **no** se sube al repositorio. Cloudflare ejecuta Zola en cada push.
+El HTML **no** se sube al repositorio. Cloudflare debe ejecutar **`zola build`** y publicar `public/`.
 
-## Conflicto Hugo / Zola
+## Error frecuente: `npx wrangler deploy`
 
-Este repo usa `zola.toml` (no `config.toml`) y `wrangler.toml` con `pages_build_output_dir`.
-Así se evita el error de autoconfig *«multiple frameworks were found: Hugo, Zola»*
-(Hugo también busca `config.toml` + `themes/`).
-
-## Flujo
+Si el log muestra:
 
 ```text
-Editar Markdown → git add → git commit → git push
-        → GitHub → Cloudflare Pages → zola build → sitio publicado
+Executing user deploy command: npx wrangler deploy
 ```
 
-## Crear el proyecto
+el proyecto está mal configurado: Wrangler intenta subir un Worker/assets **sin haber compilado Zola**.
 
-1. Cuenta en [Cloudflare](https://dash.cloudflare.com/).
-2. **Workers & Pages → Create → Pages → Connect to Git**.
-3. Autoriza GitHub y elige este repositorio.
-4. Configura el build **a mano** (no dejes que el preset autoelija si falla):
+### Ajuste correcto (Pages → Connect to Git)
 
-| Ajuste | Valor |
+En **Settings → Builds**:
+
+| Campo | Valor |
 | --- | --- |
-| Production branch | `main` |
-| Framework preset | **Zola** (o None) |
+| Framework preset | **Zola** o **None** |
 | Build command | ver abajo |
 | Build output directory | `public` |
-| Root directory | `/` (raíz del repo) |
+| Deploy command | **vacío** (no `npx wrangler deploy`) |
+| Root directory | `/` |
+| Production branch | `main` |
 
-### Build command (recomendado)
+### Build command
 
 ```bash
 if [ "$CF_PAGES_BRANCH" = "main" ]; then zola build; else zola build --base-url $CF_PAGES_URL; fi
@@ -38,46 +33,46 @@ if [ "$CF_PAGES_BRANCH" = "main" ]; then zola build; else zola build --base-url 
 
 ### Variable de entorno
 
-| Nombre | Valor sugerido |
+| Nombre | Valor |
 | --- | --- |
 | `ZOLA_VERSION` | `0.22.1` |
 
-### wrangler.toml
+Guarda y lanza **Retry deployment**.
 
-En la raíz del repo hay un `wrangler.toml` con `pages_build_output_dir = "./public"`.
-Eso marca el proyecto como Pages estático y evita la detección automática conflictiva.
+## Conflicto Hugo / Zola
+
+El repo usa `zola.toml` (no `config.toml`) para que el detector no confunda el sitio con Hugo.
+
+## Flujo
+
+```text
+Editar Markdown → git push → Cloudflare → zola build → public/ → sitio publicado
+```
+
+## Crear el proyecto desde cero
+
+1. [Cloudflare Dashboard](https://dash.cloudflare.com/) → **Workers & Pages** → **Create** → **Pages** → **Connect to Git**.
+2. Elige el repo `meratica.com`.
+3. Aplica la tabla de arriba (Build command = `zola build`, output = `public`).
+4. **No** elijas el flujo que deja como único comando `npx wrangler deploy`.
+
+Si ya creaste un Worker por error, borra ese proyecto y crea uno nuevo tipo **Pages**, o cambia Builds a la configuración de esta guía.
+
+## wrangler.toml
+
+Hay un `wrangler.toml` con `[assets] directory = "./public"` por si usas Wrangler en local tras `zola build`. En Pages con Git, lo importante es el **Build command** del dashboard.
 
 ## Dominio
 
-1. **Custom domains** en el proyecto Pages.
-2. Añade `meratica.com` y `www` si aplica.
-3. Actualiza `base_url` en `zola.toml`.
-4. Cuando el HTTPS esté estable, descomenta HSTS en `static/_headers`.
-
-## Ramas
-
-| Rama | Uso |
-| --- | --- |
-| `main` | Producción |
-| `develop` | Integración / preview |
-
-## Cabeceras y redirecciones
-
-- `static/_headers` → seguridad + caché
-- `static/_redirects` → redirecciones (p. ej. www → apex)
-
-## Comprobar el build en local
-
-```bash
-zola build
-```
+1. Custom domains en el proyecto Pages.
+2. Actualiza `base_url` en `zola.toml`.
+3. Descomenta HSTS en `static/_headers` cuando el HTTPS sea estable.
 
 ## Troubleshooting
 
 | Síntoma | Qué revisar |
 | --- | --- |
-| Multiple frameworks Hugo, Zola | Usa `zola.toml` + `wrangler.toml`; no uses `config.toml` |
-| 404 en CSS | `base_url` / build de preview |
-| Giscus no carga | CSP + `enabled = true` + IDs |
-| Feeds rotos | `generate_feeds` y `feed_filenames` |
-| Búsqueda vacía | `build_search_index` y `search_index.es.json` |
+| `npx wrangler deploy` / Missing entry-point | Build command = `zola build`; Deploy vacío; output `public` |
+| Multiple frameworks Hugo, Zola | Mantén `zola.toml`, no `config.toml` |
+| 404 en CSS (previews) | Build command con `--base-url $CF_PAGES_URL` |
+| `zola: not found` | `ZOLA_VERSION=0.22.1` |
