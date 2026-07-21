@@ -65,7 +65,7 @@ zola build
 
 ```text
 /
-├── config.toml          # Configuración Zola + extra del sitio
+├── zola.toml          # Configuración Zola + extra del sitio
 ├── content/             # Markdown
 │   ├── _index.md
 │   ├── blog/
@@ -85,7 +85,7 @@ zola build
 │   ├── _headers         # Seguridad Cloudflare
 │   └── _redirects
 ├── docs/                # Guías (Giscus, Cloudflare)
-└── themes/              # Reserva (sin tema externo)
+└── wrangler.toml        # Cloudflare Pages (salida: public/)
 ```
 
 ## Crear contenido
@@ -139,7 +139,7 @@ Preferencia AVIF → WebP → JPG/PNG. Shortcode:
 - Manifest PWA ligero
 - Giscus (desactivado hasta configurar IDs)
 
-## Configuración útil (`config.toml`)
+## Configuración útil (`zola.toml`)
 
 - `base_url` — URL canónica de producción
 - `extra.nav` — menú
@@ -172,7 +172,7 @@ Guía completa: [docs/giscus.md](docs/giscus.md).
 
 1. Repo + Discussions + app Giscus  
 2. IDs desde [giscus.app](https://giscus.app)  
-3. `[extra.giscus] enabled = true` en `config.toml`
+3. `[extra.giscus] enabled = true` en `zola.toml`
 
 Alternativa documentada: **Utterances**.
 
@@ -207,7 +207,7 @@ HSTS: descomentar cuando el dominio propio sirva HTTPS de forma estable.
 | Tarea | Acción |
 | --- | --- |
 | Nuevo artículo | Markdown en `content/blog/` + push |
-| Cambiar menú | `extra.nav` en `config.toml` |
+| Cambiar menú | `extra.nav` en `zola.toml` |
 | Actualizar Zola | Local + `ZOLA_VERSION` en Cloudflare |
 | Revisar enlaces | `zola check` |
 | Dependencias JS | Ninguna de npm; solo scripts en `static/js/` |
@@ -226,7 +226,7 @@ HSTS: descomentar cuando el dominio propio sirva HTTPS de forma estable.
 ## Publicar desde cero (checklist)
 
 1. Instalar Zola y clonar/crear el repo.  
-2. Editar `config.toml` (`base_url`, autor, redes).  
+2. Editar `zola.toml` (`base_url`, autor, redes).  
 3. Sustituir contenido de ejemplo.  
 4. `zola serve` y revisar local.  
 5. Crear repo en GitHub; push `main` y `develop`.  

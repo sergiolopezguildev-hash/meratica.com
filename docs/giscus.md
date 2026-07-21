@@ -45,7 +45,7 @@ meratica/meratica-comments
 
 ## 5. Configurar este proyecto
 
-En `config.toml`:
+En `zola.toml`:
 
 ```toml
 [extra.giscus]

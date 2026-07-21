@@ -24,7 +24,7 @@ Los comentarios de este sitio pueden activarse con **Giscus**: un widget que usa
 1. Crea un repositorio (o usa el del sitio) y activa Discussions.
 2. Instala la GitHub App [giscus](https://github.com/apps/giscus).
 3. Configura [giscus.app](https://giscus.app) y copia `repo`, `repo_id`, `category` y `category_id`.
-4. Pégalos en `config.toml` bajo `[extra.giscus]` y pon `enabled = true`.
+4. Pégalos en `zola.toml` bajo `[extra.giscus]` y pon `enabled = true`.
 
 La documentación completa está en `docs/giscus.md`.
 

@@ -5,7 +5,7 @@ template = "page.html"
 weight = 20
 +++
 
-Puedes escribirme a **hola@meratica.com** (sustituye por tu correo real en `config.toml`).
+Puedes escribirme a **hola@meratica.com** (sustituye por tu correo real en `zola.toml`).
 
 También estoy en GitHub: [github.com/meratica](https://github.com/meratica).
 

@@ -1,4 +1,0 @@
-# Carpeta reservada para temas de Zola.
-# Este proyecto usa plantillas propias en /templates (sin tema externo).
-# Si instalas un tema: git submodule add <url> themes/<nombre>
-# y activa theme = "<nombre>" en config.toml.
