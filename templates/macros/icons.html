@@ -18,7 +18,7 @@
     <span aria-hidden="true">·</span>
     <span class="post-cats">
       {% for cat in page.taxonomies.categories %}
-        <a href="{{ get_taxonomy_url(kind='categories', name=cat) }}">{{ cat }}</a>{% if not loop.last %}, {% endif %}
+        <a href="/categories/{{ cat | slugify }}/">{{ cat }}</a>{% if not loop.last %}, {% endif %}
       {% endfor %}
     </span>
   {% endif %}
@@ -28,7 +28,7 @@
 {% macro post_card(page) %}
 <article class="post-card">
   <h2 class="post-card-title">
-    <a href="{{ page.permalink }}">{{ page.title }}</a>
+    <a href="{{ page.path }}">{{ page.title }}</a>
   </h2>
   {{ self::post_meta(page=page) }}
   {% if page.description or page.summary %}
@@ -37,7 +37,7 @@
   {% if page.taxonomies.tags %}
     <ul class="tag-list" aria-label="Etiquetas">
       {% for tag in page.taxonomies.tags %}
-        <li><a href="{{ get_taxonomy_url(kind='tags', name=tag) }}">#{{ tag }}</a></li>
+        <li><a href="/tags/{{ tag | slugify }}/">#{{ tag }}</a></li>
       {% endfor %}
     </ul>
   {% endif %}

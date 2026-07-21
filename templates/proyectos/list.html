@@ -21,7 +21,7 @@
     <div class="project-grid project-grid-full">
       {% for page in section.pages %}
         <article class="project-item">
-          <h2><a href="{{ page.permalink }}">{{ page.title }}</a></h2>
+          <h2><a href="{{ page.path }}">{{ page.title }}</a></h2>
           {% if page.description %}
             <p>{{ page.description }}</p>
           {% endif %}

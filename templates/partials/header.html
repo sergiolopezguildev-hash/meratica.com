@@ -1,6 +1,6 @@
 <header class="site-header">
   <div class="container header-inner">
-    <a class="brand" href="{{ get_url(path='@/_index.md') }}" aria-label="{{ config.title }} — inicio">
+    <a class="brand" href="/" aria-label="{{ config.title }} — inicio">
       <span class="brand-mark" aria-hidden="true">M</span>
       <span class="brand-name">{{ config.title }}</span>
     </a>
@@ -30,7 +30,7 @@
             {% endif %}
           {% endif %}
           <li>
-            <a href="{{ get_url(path=item.url) }}" {% if current %}aria-current="page"{% endif %}>
+            <a href="{{ item.url }}" {% if current %}aria-current="page"{% endif %}>
               {{ item.name }}
             </a>
           </li>

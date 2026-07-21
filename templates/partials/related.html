@@ -7,7 +7,7 @@
       {% for p in blog.pages %}
         {% if p.permalink != page.permalink %}
           <li>
-            <a href="{{ p.permalink }}">{{ p.title }}</a>
+            <a href="{{ p.path }}">{{ p.title }}</a>
             {% if p.date %}
               <time datetime="{{ p.date | date(format='%Y-%m-%d') }}">{{ p.date | date(format='%d %b %Y') }}</time>
             {% endif %}

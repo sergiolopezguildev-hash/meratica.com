@@ -5,7 +5,7 @@
 <section class="section">
   <div class="container">
     {% set crumb_a = taxonomy.name | title %}
-    {% set crumb_a_url = get_url(path=taxonomy.name) %}
+    {% set crumb_a_url = "/" ~ taxonomy.name ~ "/" %}
     {% set crumb_b = term.name %}
     {% include "partials/breadcrumbs.html" %}
 

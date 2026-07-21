@@ -15,13 +15,17 @@ Este proyecto usa el flujo oficial de Zola + Workers:
 | `wrangler.toml` | `[build]` + `[assets]` |
 | `zola.toml` | Config del sitio (no `config.toml`, evita confusión con Hugo) |
 
-## Dashboard
+## Variables de entorno
 
-1. **Workers & Pages → Create →** conecta el repo (Workers está bien con este setup).
-2. Deja el deploy command: `npx wrangler deploy` (por defecto).
-3. Opcional: env `ZOLA_VERSION=0.22.1`.
+Un Worker **solo de assets** no permite Variables en el dashboard
+(*«Variables cannot be added to a Worker that only has static assets»*).
 
-No hace falta un Build command aparte: el build va dentro de Wrangler.
+No uses `BASE_URL` ahí. Opciones:
+
+1. **Recomendado ahora:** enlaces root-relative (ya están en el repo). No necesitas variable.
+2. Cuando tengas dominio: edita `base_url` en `zola.toml` y haz push.
+3. Si más adelante añades un Worker con código, entonces sí podrás usar variables.
+
 
 ## Local
 

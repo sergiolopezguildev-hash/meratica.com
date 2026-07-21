@@ -3,9 +3,9 @@
 # Documentación: https://www.getzola.org/documentation/getting-started/configuration/
 # =============================================================================
 
-# URL canónica de producción. Mientras el sitio viva solo en workers.dev,
-# pon en Cloudflare la variable BASE_URL=https://TU-SUBDOMINIO.workers.dev
-# (build.sh la usa con --base-url). Los CSS/JS ya son root-relative (/style.css).
+# URL canónica (SEO/canonical/OG). Con Worker solo-assets NO puedes usar
+# variables de entorno en Cloudflare: edita este valor cuando tengas dominio.
+# Mientras uses *.workers.dev, los enlaces internos van root-relative (/blog/).
 base_url = "https://meratica.com"
 title = "Meratica"
 description = "Sitio personal de Meratica: blog técnico, proyectos y notas sobre software, web estática y DevOps."

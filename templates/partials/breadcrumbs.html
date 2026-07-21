@@ -1,7 +1,7 @@
 {% if config.extra.enable_breadcrumbs %}
 <nav class="breadcrumbs" aria-label="Migas de pan">
   <ol>
-    <li><a href="{{ get_url(path='@/_index.md') }}">Inicio</a></li>
+    <li><a href="/">Inicio</a></li>
     {% if crumb_a_url %}
       <li><a href="{{ crumb_a_url }}">{{ crumb_a }}</a></li>
     {% elif crumb_a %}

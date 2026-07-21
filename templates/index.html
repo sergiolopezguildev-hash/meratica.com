@@ -10,8 +10,8 @@
       <p class="hero-lead">{{ section.description }}</p>
     {% endif %}
     <div class="hero-actions">
-      <a class="btn btn-primary" href="{{ get_url(path='@/blog/_index.md') }}">Leer el blog</a>
-      <a class="btn btn-ghost" href="{{ get_url(path='@/proyectos/_index.md') }}">Ver proyectos</a>
+      <a class="btn btn-primary" href="/blog/">Leer el blog</a>
+      <a class="btn btn-ghost" href="/proyectos/">Ver proyectos</a>
     </div>
   </div>
   <div class="hero-visual" aria-hidden="true">
@@ -32,7 +32,7 @@
       {% endfor %}
     </div>
     <p class="section-more">
-      <a href="{{ get_url(path='@/blog/_index.md') }}">Ver todas las entradas →</a>
+      <a href="/blog/">Ver todas las entradas →</a>
     </p>
   </div>
 </section>
@@ -47,7 +47,7 @@
     <div class="project-grid">
       {% for page in projects.pages | slice(end=3) %}
         <article class="project-item">
-          <h3><a href="{{ page.permalink }}">{{ page.title }}</a></h3>
+          <h3><a href="{{ page.path }}">{{ page.title }}</a></h3>
           {% if page.description %}
             <p>{{ page.description }}</p>
           {% endif %}

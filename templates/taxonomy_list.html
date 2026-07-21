@@ -15,7 +15,7 @@
     <ul class="taxonomy-index">
       {% for term in terms %}
         <li>
-          <a href="{{ term.permalink }}">{{ term.name }}</a>
+          <a href="{{ term.path }}">{{ term.name }}</a>
           <span class="count">{{ term.pages | length }}</span>
         </li>
       {% endfor %}

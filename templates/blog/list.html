@@ -13,13 +13,13 @@
         <p>{{ section.description }}</p>
       {% endif %}
       <p class="feed-links">
-        <a href="{{ get_url(path='atom.xml', trailing_slash=false) }}">Atom</a>
+        <a href="/atom.xml">Atom</a>
         ·
-        <a href="{{ get_url(path='rss.xml', trailing_slash=false) }}">RSS</a>
+        <a href="/rss.xml">RSS</a>
         ·
-        <a href="{{ get_url(path='categories') }}">Categorías</a>
+        <a href="/categories/">Categorías</a>
         ·
-        <a href="{{ get_url(path='tags') }}">Etiquetas</a>
+        <a href="/tags/">Etiquetas</a>
       </p>
     </header>
 
