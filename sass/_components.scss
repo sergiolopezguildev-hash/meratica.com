@@ -4,8 +4,8 @@
   top: -100px;
   z-index: 100;
   padding: 0.6rem 0.9rem;
-  background: var(--accent);
-  color: #fff;
+  background: var(--ochre);
+  color: var(--on-accent);
   border-radius: var(--radius);
   text-decoration: none;
 }
@@ -32,24 +32,14 @@
 }
 
 .btn-primary {
-  background: var(--accent);
-  color: #fff;
+  background: var(--ochre);
+  color: var(--on-accent);
   border: 1px solid transparent;
 }
 
 .btn-primary:hover {
-  background: var(--accent-hover);
-  color: #fff;
-}
-
-html[data-theme="dark"] .btn-primary {
-  color: #062016;
-}
-
-@media (prefers-color-scheme: dark) {
-  html[data-theme="system"] .btn-primary {
-    color: #062016;
-  }
+  background: var(--ochre-hover);
+  color: var(--on-accent);
 }
 
 .btn-ghost {

@@ -18,9 +18,9 @@
   top: 0;
   z-index: 40;
   height: var(--header-h);
-  backdrop-filter: blur(12px);
-  background: color-mix(in srgb, var(--bg) 82%, transparent);
-  border-bottom: 1px solid var(--border);
+  background: var(--bar);
+  border-bottom: 1px solid color-mix(in srgb, var(--bar) 70%, #000);
+  color: var(--bar-text);
 }
 
 .header-inner {
@@ -36,13 +36,13 @@
   align-items: center;
   gap: 0.65rem;
   text-decoration: none;
-  color: var(--text);
+  color: var(--bar-text);
   font-weight: 700;
   letter-spacing: -0.03em;
 }
 
 .brand:hover {
-  color: var(--text);
+  color: var(--bar-text);
 }
 
 .brand-mark {
@@ -51,20 +51,10 @@
   width: 2rem;
   height: 2rem;
   border-radius: 0.55rem;
-  background: var(--accent);
-  color: #fff;
+  background: color-mix(in srgb, var(--bar-text) 18%, transparent);
+  color: var(--bar-text);
+  border: 1px solid color-mix(in srgb, var(--bar-text) 35%, transparent);
   font-size: 0.95rem;
-}
-
-html[data-theme="dark"] .brand-mark,
-html[data-theme="system"] .brand-mark {
-  color: #062016;
-}
-
-@media (prefers-color-scheme: light) {
-  html[data-theme="system"] .brand-mark {
-    color: #fff;
-  }
 }
 
 .brand-name {
@@ -89,7 +79,7 @@ html[data-theme="system"] .brand-mark {
   display: inline-block;
   padding: 0.45rem 0.7rem;
   text-decoration: none;
-  color: var(--text-muted);
+  color: color-mix(in srgb, var(--bar-text) 82%, transparent);
   border-radius: var(--radius);
   font-size: var(--text-sm);
   font-weight: 500;
@@ -97,13 +87,22 @@ html[data-theme="system"] .brand-mark {
 
 .nav-list a:hover,
 .nav-list a[aria-current="page"] {
-  color: var(--text);
-  background: var(--bg-muted);
+  color: var(--bar-text);
+  background: color-mix(in srgb, var(--bar-text) 14%, transparent);
 }
 
 .nav-actions {
   display: flex;
   gap: 0.25rem;
+}
+
+.nav-actions .icon-btn {
+  color: var(--bar-text);
+}
+
+.nav-actions .icon-btn:hover {
+  background: color-mix(in srgb, var(--bar-text) 14%, transparent);
+  color: var(--bar-text);
 }
 
 .nav-toggle {
@@ -119,7 +118,7 @@ html[data-theme="system"] .brand-mark {
 .nav-toggle-bar {
   width: 1.15rem;
   height: 2px;
-  background: var(--text);
+  background: var(--bar-text);
   border-radius: 2px;
 }
 
@@ -135,9 +134,10 @@ html[data-theme="system"] .brand-mark {
     flex-direction: column;
     align-items: stretch;
     padding: var(--space-4);
-    background: var(--bg-elevated);
-    border-bottom: 1px solid var(--border);
+    background: var(--bar);
+    border-bottom: 1px solid color-mix(in srgb, var(--bar) 70%, #000);
     box-shadow: var(--shadow);
+    color: var(--bar-text);
   }
 
   .site-nav.is-open {
@@ -156,8 +156,9 @@ html[data-theme="system"] .brand-mark {
 
 .site-footer {
   margin-top: var(--space-10);
-  border-top: 1px solid var(--border);
-  background: var(--bg-elevated);
+  border-top: 1px solid color-mix(in srgb, var(--bar) 70%, #000);
+  background: var(--bar);
+  color: var(--bar-text);
   padding: var(--space-8) 0;
 }
 
@@ -180,7 +181,7 @@ html[data-theme="system"] .brand-mark {
 
 .footer-text,
 .copyright {
-  color: var(--text-muted);
+  color: color-mix(in srgb, var(--bar-text) 75%, transparent);
   font-size: var(--text-sm);
   margin: 0;
 }
@@ -197,12 +198,12 @@ html[data-theme="system"] .brand-mark {
 .footer-nav a,
 .social-list a {
   text-decoration: none;
-  color: var(--text-muted);
+  color: color-mix(in srgb, var(--bar-text) 80%, transparent);
 }
 
 .footer-nav a:hover,
 .social-list a:hover {
-  color: var(--text);
+  color: var(--bar-text);
 }
 
 .section {
