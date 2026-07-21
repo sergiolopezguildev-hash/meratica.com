@@ -52,7 +52,16 @@ Ejemplos buenos de nombre:
 
 ### Paso 3 — Pegar la plantilla y rellenar
 
-Borra lo que haya y pega esto:
+Abre la plantilla completa (con **todos** los ejemplos explicados):
+
+https://github.com/sergiolopezguildev-hash/meratica.com/blob/main/docs/plantillas/articulo-blog.md
+
+1. Pulsa el fichero → icono de copiar (o selecciona todo y Ctrl+C)
+2. Pégalo en tu fichero nuevo de `content/blog/`
+3. Rellena título, fecha y texto
+4. Borra las secciones de ejemplo que no necesites (tablas, fórmulas, etc.)
+
+Versión mínima si solo quieres texto sencillo:
 
 ```md
 +++
@@ -63,11 +72,11 @@ draft = false
 [taxonomies]
 categories = ["General"]
 tags = ["familia", "notas"]
+[extra]
+toc = true
 +++
 
 Escribe aquí el texto del artículo.
-
-Puedes usar párrafos normales.
 
 ## Un subtítulo
 
@@ -117,6 +126,12 @@ content/proyectos/nombre-del-proyecto.md
 ```
 
 ### Paso 2 — Plantilla
+
+Plantilla completa (todos los campos y ejemplos):
+
+https://github.com/sergiolopezguildev-hash/meratica.com/blob/main/docs/plantillas/proyecto.md
+
+Cópiala en `content/proyectos/…` y rellena. Versión mínima:
 
 ```md
 +++
