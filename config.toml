@@ -1,0 +1,115 @@
+# =============================================================================
+# Meratica.com — Configuración de Zola
+# Documentación: https://www.getzola.org/documentation/getting-started/configuration/
+# =============================================================================
+
+base_url = "https://meratica.com"
+title = "Meratica"
+description = "Sitio personal de Meratica: blog técnico, proyectos y notas sobre software, web estática y DevOps."
+default_language = "es"
+
+compile_sass = true
+minify_html = true
+generate_feeds = true
+feed_filenames = ["atom.xml", "rss.xml"]
+generate_sitemap = true
+build_search_index = true
+author = "Meratica"
+
+taxonomies = [
+    { name = "categories", feed = true, paginate_by = 6 },
+    { name = "tags", feed = true, paginate_by = 6 },
+]
+
+[search]
+include_title = true
+include_description = true
+include_path = true
+include_content = true
+index_format = "elasticlunr_json"
+
+[markdown]
+render_emoji = false
+external_links_target_blank = true
+external_links_no_follow = true
+external_links_no_referrer = true
+smart_punctuation = true
+bottom_footnotes = true
+lazy_async_image = true
+github_alerts = true
+
+[markdown.highlighting]
+# Zola 0.22+: theme obligatorio; style = "inline" | "class"
+style = "inline"
+theme = "nord"
+error_on_missing_language = false
+
+[slugify]
+paths = "on"
+taxonomies = "on"
+anchors = "on"
+
+[link_checker]
+internal_level = "warn"
+external_level = "warn"
+
+[extra]
+# --- Identidad del sitio ---
+author_name = "Meratica"
+author_email = "hola@meratica.com"
+author_bio = "Desarrollador interesado en software simple, rendimiento y sitios estáticos."
+language_code = "es"
+copyright_year = "2026"
+footer_text = "Hecho con Zola. 100 % estático."
+
+# --- Navegación principal (editable sin tocar plantillas) ---
+nav = [
+    { name = "Inicio", url = "/", key = "home" },
+    { name = "Quién soy", url = "/quien-soy/", key = "about" },
+    { name = "Blog", url = "/blog/", key = "blog" },
+    { name = "Proyectos", url = "/proyectos/", key = "projects" },
+    { name = "Contacto", url = "/contacto/", key = "contact" },
+]
+
+# --- Redes / perfiles ---
+social = [
+    { name = "GitHub", url = "https://github.com/meratica", icon = "github" },
+    { name = "RSS", url = "/atom.xml", icon = "rss" },
+]
+
+# --- Tema ---
+# system | light | dark
+default_theme = "system"
+enable_theme_toggle = true
+
+# --- Funciones opcionales ---
+enable_toc = true
+enable_back_to_top = true
+enable_code_copy = true
+enable_search = true
+enable_breadcrumbs = true
+enable_reading_time = true
+enable_related_posts = true
+related_posts_count = 3
+words_per_minute = 200
+enable_katex = false
+
+# --- SEO / redes ---
+og_image = "/img/og-default.png"
+twitter_site = "@meratica"
+twitter_creator = "@meratica"
+
+# --- Giscus: docs/giscus.md — enabled = true + IDs de giscus.app ---
+[extra.giscus]
+enabled = false
+repo = "USUARIO/REPO-COMENTARIOS"
+repo_id = "R_xxxxxxxx"
+category = "Announcements"
+category_id = "DIC_xxxxxxxx"
+mapping = "pathname"
+reactions_enabled = "1"
+emit_metadata = "0"
+input_position = "top"
+theme = "preferred_color_scheme"
+lang = "es"
+loading = "lazy"

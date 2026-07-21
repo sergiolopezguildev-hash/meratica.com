@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% import "macros/icons.html" as macros %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+    {% set crumb_a = section.title %}
+    {% include "partials/breadcrumbs.html" %}
+
+    <header class="section-header">
+      <h1>{{ section.title }}</h1>
+      {% if section.description %}
+        <p>{{ section.description }}</p>
+      {% endif %}
+    </header>
+
+    {% if section.content %}
+      <div class="prose">{{ section.content | safe }}</div>
+    {% endif %}
+
+    <div class="project-grid project-grid-full">
+      {% for page in section.pages %}
+        <article class="project-item">
+          <h2><a href="{{ page.permalink }}">{{ page.title }}</a></h2>
+          {% if page.description %}
+            <p>{{ page.description }}</p>
+          {% endif %}
+          {% if page.extra.stack %}
+            <p class="project-stack">{{ page.extra.stack | join(sep=" · ") }}</p>
+          {% endif %}
+          {% if page.extra.repo or page.extra.demo %}
+            <p class="project-links">
+              {% if page.extra.demo %}<a href="{{ page.extra.demo }}" rel="noopener noreferrer" target="_blank">Demo</a>{% endif %}
+              {% if page.extra.repo %}{% if page.extra.demo %} · {% endif %}<a href="{{ page.extra.repo }}" rel="noopener noreferrer" target="_blank">Código</a>{% endif %}
+            </p>
+          {% endif %}
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock content %}

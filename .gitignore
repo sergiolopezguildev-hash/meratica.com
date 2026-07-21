@@ -1,0 +1,34 @@
+# Dependencias y artefactos de build
+/public/
+/public/**
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Editores / IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.history/
+
+# Entorno local
+.env
+.env.*
+!.env.example
+
+# Caché y temporales
+*.tmp
+*.log
+.cache/
+tmp/
+temp/
+
+# Sistema
+ehthumbs.db
+Icon?
+
+# OS
+.Spotlight-V100
+.Trashes

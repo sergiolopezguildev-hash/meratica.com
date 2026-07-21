@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% import "macros/icons.html" as macros %}
+
+{% block content %}
+<article class="page container narrow">
+  {% set crumb_a = "Proyectos" %}
+  {% set crumb_a_url = get_url(path="@/proyectos/_index.md") %}
+  {% set crumb_b = page.title %}
+  {% include "partials/breadcrumbs.html" %}
+
+  <header class="page-header">
+    <h1>{{ page.title }}</h1>
+    {% if page.description %}
+      <p class="page-lead">{{ page.description }}</p>
+    {% endif %}
+    {% if page.extra.stack %}
+      <p class="project-stack">{{ page.extra.stack | join(sep=" · ") }}</p>
+    {% endif %}
+    {% if page.extra.repo or page.extra.demo %}
+      <p class="project-links">
+        {% if page.extra.demo %}<a class="btn btn-primary" href="{{ page.extra.demo }}" rel="noopener noreferrer" target="_blank">Ver demo</a>{% endif %}
+        {% if page.extra.repo %}<a class="btn btn-ghost" href="{{ page.extra.repo }}" rel="noopener noreferrer" target="_blank">Ver código</a>{% endif %}
+      </p>
+    {% endif %}
+  </header>
+
+  <div class="prose">
+    {{ page.content | safe }}
+  </div>
+</article>
+{% endblock content %}

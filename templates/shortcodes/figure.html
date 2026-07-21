@@ -1,0 +1,22 @@
+<figure class="figure">
+  <picture>
+    {% if avif %}
+      <source srcset="{{ get_url(path=avif) }}" type="image/avif">
+    {% endif %}
+    {% if webp %}
+      <source srcset="{{ get_url(path=webp) }}" type="image/webp">
+    {% endif %}
+    <img
+      src="{{ get_url(path=src) }}"
+      alt="{{ alt | default(value='') }}"
+      {% if width %}width="{{ width }}"{% endif %}
+      {% if height %}height="{{ height }}"{% endif %}
+      loading="{{ loading | default(value='lazy') }}"
+      decoding="async"
+      {% if class %}class="{{ class }}"{% endif %}
+    >
+  </picture>
+  {% if caption %}
+    <figcaption>{{ caption }}</figcaption>
+  {% endif %}
+</figure>

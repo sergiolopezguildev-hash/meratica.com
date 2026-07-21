@@ -1,0 +1,19 @@
+<dialog class="search-dialog" id="search-dialog" aria-labelledby="search-title">
+  <div class="search-panel">
+    <div class="search-header">
+      <h2 id="search-title" class="visually-hidden">Buscar en el sitio</h2>
+      <label class="visually-hidden" for="search-input">Buscar</label>
+      <input
+        type="search"
+        id="search-input"
+        class="search-input"
+        placeholder="Buscar artículos…"
+        autocomplete="off"
+        enterkeyhint="search"
+      >
+      <button type="button" class="icon-btn" id="search-close" aria-label="Cerrar búsqueda">×</button>
+    </div>
+    <p class="search-hint" id="search-hint">Escribe al menos 2 caracteres. Atajo: <kbd>/</kbd></p>
+    <ul class="search-results" id="search-results" role="listbox" aria-label="Resultados"></ul>
+  </div>
+</dialog>

@@ -1,0 +1,65 @@
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="{{ get_url(path='@/_index.md') }}" aria-label="{{ config.title }} — inicio">
+      <span class="brand-mark" aria-hidden="true">M</span>
+      <span class="brand-name">{{ config.title }}</span>
+    </a>
+
+    <button
+      type="button"
+      class="nav-toggle"
+      id="nav-toggle"
+      aria-controls="site-nav"
+      aria-expanded="false"
+      aria-label="Abrir menú de navegación"
+    >
+      <span class="nav-toggle-bar" aria-hidden="true"></span>
+      <span class="nav-toggle-bar" aria-hidden="true"></span>
+      <span class="nav-toggle-bar" aria-hidden="true"></span>
+    </button>
+
+    <nav id="site-nav" class="site-nav" aria-label="Principal">
+      <ul class="nav-list">
+        {% for item in config.extra.nav %}
+          {% set current = false %}
+          {% if current_path %}
+            {% if item.url == "/" and current_path == "/" %}
+              {% set_global current = true %}
+            {% elif item.url != "/" and current_path is starting_with(item.url) %}
+              {% set_global current = true %}
+            {% endif %}
+          {% endif %}
+          <li>
+            <a href="{{ get_url(path=item.url) }}" {% if current %}aria-current="page"{% endif %}>
+              {{ item.name }}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+
+      <div class="nav-actions">
+        {% if config.extra.enable_search %}
+          <button type="button" class="icon-btn" id="search-open" aria-label="Abrir búsqueda" aria-controls="search-dialog" aria-expanded="false">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>
+            </svg>
+          </button>
+        {% endif %}
+        {% if config.extra.enable_theme_toggle %}
+          <button type="button" class="icon-btn" id="theme-toggle" aria-label="Cambiar tema claro u oscuro">
+            <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+            </svg>
+            <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M21 14.5A8.5 8.5 0 1 1 9.5 3a7 7 0 0 0 11.5 11.5z"/>
+            </svg>
+          </button>
+        {% endif %}
+      </div>
+    </nav>
+  </div>
+</header>
+
+{% if config.extra.enable_search %}
+  {% include "partials/search.html" %}
+{% endif %}

@@ -1,0 +1,85 @@
+{% macro reading_time(page) %}
+{% set wpm = config.extra.words_per_minute | default(value=200) %}
+{% set minutes = (page.word_count / wpm) | round(method="ceil") %}
+{% if minutes < 1 %}{% set minutes = 1 %}{% endif %}
+{{ minutes }} min de lectura
+{% endmacro reading_time %}
+
+{% macro post_meta(page) %}
+<div class="post-meta">
+  {% if page.date %}
+    <time datetime="{{ page.date | date(format='%Y-%m-%d') }}">{{ page.date | date(format='%d %b %Y') }}</time>
+  {% endif %}
+  {% if config.extra.enable_reading_time %}
+    <span aria-hidden="true">·</span>
+    <span>{{ self::reading_time(page=page) }}</span>
+  {% endif %}
+  {% if page.taxonomies.categories %}
+    <span aria-hidden="true">·</span>
+    <span class="post-cats">
+      {% for cat in page.taxonomies.categories %}
+        <a href="{{ get_taxonomy_url(kind='categories', name=cat) }}">{{ cat }}</a>{% if not loop.last %}, {% endif %}
+      {% endfor %}
+    </span>
+  {% endif %}
+</div>
+{% endmacro post_meta %}
+
+{% macro post_card(page) %}
+<article class="post-card">
+  <h2 class="post-card-title">
+    <a href="{{ page.permalink }}">{{ page.title }}</a>
+  </h2>
+  {{ self::post_meta(page=page) }}
+  {% if page.description or page.summary %}
+    <p class="post-card-excerpt">{{ page.description | default(value=page.summary) | striptags | truncate(length=180) }}</p>
+  {% endif %}
+  {% if page.taxonomies.tags %}
+    <ul class="tag-list" aria-label="Etiquetas">
+      {% for tag in page.taxonomies.tags %}
+        <li><a href="{{ get_taxonomy_url(kind='tags', name=tag) }}">#{{ tag }}</a></li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+</article>
+{% endmacro post_card %}
+
+{% macro pagination(paginator) %}
+{% if paginator.number_pagers > 1 %}
+<nav class="pagination" aria-label="Paginación">
+  <ul>
+    {% if paginator.previous %}
+      <li><a href="{{ paginator.previous }}" rel="prev">← Anterior</a></li>
+    {% else %}
+      <li><span class="disabled" aria-disabled="true">← Anterior</span></li>
+    {% endif %}
+    <li class="pagination-status">
+      Página {{ paginator.current_index }} de {{ paginator.number_pagers }}
+    </li>
+    {% if paginator.next %}
+      <li><a href="{{ paginator.next }}" rel="next">Siguiente →</a></li>
+    {% else %}
+      <li><span class="disabled" aria-disabled="true">Siguiente →</span></li>
+    {% endif %}
+  </ul>
+</nav>
+{% endif %}
+{% endmacro pagination %}
+
+{% macro search() %}
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+  <circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>
+</svg>
+{% endmacro search %}
+
+{% macro sun() %}
+<svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+  <circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+</svg>
+{% endmacro sun %}
+
+{% macro moon() %}
+<svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+  <path d="M21 14.5A8.5 8.5 0 1 1 9.5 3a7 7 0 0 0 11.5 11.5z"/>
+</svg>
+{% endmacro moon %}

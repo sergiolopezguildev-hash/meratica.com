@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% import "macros/icons.html" as macros %}
+
+{% block content %}
+<section class="hero">
+  <div class="container hero-inner">
+    <p class="hero-brand">{{ config.title }}</p>
+    <h1 class="hero-title">{{ section.title }}</h1>
+    {% if section.description %}
+      <p class="hero-lead">{{ section.description }}</p>
+    {% endif %}
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="{{ get_url(path='@/blog/_index.md') }}">Leer el blog</a>
+      <a class="btn btn-ghost" href="{{ get_url(path='@/proyectos/_index.md') }}">Ver proyectos</a>
+    </div>
+  </div>
+  <div class="hero-visual" aria-hidden="true">
+    <div class="hero-grid"></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <header class="section-header">
+      <h2>Últimas entradas</h2>
+      <p>Notas técnicas, guías y aprendizajes.</p>
+    </header>
+    {% set blog = get_section(path="blog/_index.md") %}
+    <div class="post-list">
+      {% for page in blog.pages | slice(end=3) %}
+        {{ macros::post_card(page=page) }}
+      {% endfor %}
+    </div>
+    <p class="section-more">
+      <a href="{{ get_url(path='@/blog/_index.md') }}">Ver todas las entradas →</a>
+    </p>
+  </div>
+</section>
+
+<section class="section section-muted">
+  <div class="container">
+    <header class="section-header">
+      <h2>Proyectos destacados</h2>
+      <p>Trabajo seleccionado y experimentos abiertos.</p>
+    </header>
+    {% set projects = get_section(path="proyectos/_index.md") %}
+    <div class="project-grid">
+      {% for page in projects.pages | slice(end=3) %}
+        <article class="project-item">
+          <h3><a href="{{ page.permalink }}">{{ page.title }}</a></h3>
+          {% if page.description %}
+            <p>{{ page.description }}</p>
+          {% endif %}
+          {% if page.extra.stack %}
+            <p class="project-stack">{{ page.extra.stack | join(sep=" · ") }}</p>
+          {% endif %}
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock content %}

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% import "macros/icons.html" as macros %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+    {% set crumb_a = taxonomy.name | title %}
+    {% include "partials/breadcrumbs.html" %}
+
+    <header class="section-header">
+      <h1>{{ taxonomy.name | title }}</h1>
+      <p>Explora el contenido por {{ taxonomy.name }}.</p>
+    </header>
+
+    <ul class="taxonomy-index">
+      {% for term in terms %}
+        <li>
+          <a href="{{ term.permalink }}">{{ term.name }}</a>
+          <span class="count">{{ term.pages | length }}</span>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+{% endblock content %}

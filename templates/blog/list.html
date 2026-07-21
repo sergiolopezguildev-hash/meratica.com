@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% import "macros/icons.html" as macros %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+    {% set crumb_a = "Blog" %}
+    {% include "partials/breadcrumbs.html" %}
+
+    <header class="section-header">
+      <h1>{{ section.title }}</h1>
+      {% if section.description %}
+        <p>{{ section.description }}</p>
+      {% endif %}
+      <p class="feed-links">
+        <a href="{{ get_url(path='atom.xml', trailing_slash=false) }}">Atom</a>
+        ·
+        <a href="{{ get_url(path='rss.xml', trailing_slash=false) }}">RSS</a>
+        ·
+        <a href="{{ get_url(path='categories') }}">Categorías</a>
+        ·
+        <a href="{{ get_url(path='tags') }}">Etiquetas</a>
+      </p>
+    </header>
+
+    {% if section.content %}
+      <div class="prose">{{ section.content | safe }}</div>
+    {% endif %}
+
+    <div class="post-list">
+      {% if paginator %}
+        {% for page in paginator.pages %}
+          {{ macros::post_card(page=page) }}
+        {% endfor %}
+      {% else %}
+        {% for page in section.pages %}
+          {{ macros::post_card(page=page) }}
+        {% endfor %}
+      {% endif %}
+    </div>
+
+    {% if paginator %}
+      {{ macros::pagination(paginator=paginator) }}
+    {% endif %}
+  </div>
+</section>
+{% endblock content %}

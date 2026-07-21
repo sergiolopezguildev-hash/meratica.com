@@ -1,0 +1,15 @@
+# Configuración de ejemplo para Cloudflare Pages
+# (referencia; la UI del dashboard es la fuente de verdad)
+#
+# Build command:
+#   if [ "$CF_PAGES_BRANCH" = "main" ]; then zola build; else zola build --base-url $CF_PAGES_URL; fi
+#
+# Build output directory: public
+# Environment variable: ZOLA_VERSION=0.22.1
+# Production branch: main
+
+name = "meratica"
+compatibility_date = "2026-01-01"
+
+[env]
+ZOLA_VERSION = "0.22.1"

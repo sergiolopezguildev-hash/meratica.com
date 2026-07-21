@@ -1,0 +1,11 @@
+# Imágenes del sitio
+#
+# Convención recomendada:
+#   /img/nombre.avif  (preferido)
+#   /img/nombre.webp  (fallback moderno)
+#   /img/nombre.jpg   (fallback universal)
+#
+# Shortcode:
+#   {{ figure(src="img/foto.jpg", webp="img/foto.webp", avif="img/foto.avif", alt="Descripción") }}
+#
+# og-default.png — imagen social por defecto (1200×630 recomendado)

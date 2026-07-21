@@ -1,0 +1,23 @@
+{
+  "name": "Meratica",
+  "short_name": "Meratica",
+  "description": "Sitio personal de Meratica: blog, proyectos y notas técnicas.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f7f8fa",
+  "theme_color": "#0b6e4f",
+  "lang": "es",
+  "icons": [
+    {
+      "src": "/favicon/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}

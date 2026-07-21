@@ -1,0 +1,5 @@
+# Redirecciones Cloudflare Pages
+# https://developers.cloudflare.com/pages/configuration/redirects/
+
+# Ejemplo: redirigir www → apex (ajusta el dominio)
+# https://www.meratica.com/* https://meratica.com/:splat 301

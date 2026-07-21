@@ -1,0 +1,85 @@
+.prose {
+  max-width: 70ch;
+}
+
+.prose > :first-child {
+  margin-top: 0;
+}
+
+.prose h2,
+.prose h3,
+.prose h4 {
+  margin-top: var(--space-8);
+  scroll-margin-top: calc(var(--header-h) + 1rem);
+}
+
+.prose a {
+  font-weight: 500;
+}
+
+.prose blockquote {
+  margin: 0 0 var(--space-5);
+  padding: var(--space-3) var(--space-4);
+  border-left: 3px solid var(--accent);
+  background: var(--bg-muted);
+  color: var(--text-muted);
+}
+
+.prose pre {
+  margin: 0 0 var(--space-5);
+  padding: var(--space-4);
+  overflow-x: auto;
+  border-radius: var(--radius);
+  background: #0f172a;
+  color: #e2e8f0;
+  border: 1px solid var(--border);
+  line-height: 1.55;
+}
+
+.prose :not(pre) > code {
+  padding: 0.12rem 0.35rem;
+  border-radius: 0.3rem;
+  background: var(--bg-muted);
+  border: 1px solid var(--border);
+}
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: var(--space-5);
+  font-size: var(--text-sm);
+}
+
+.prose th,
+.prose td {
+  border: 1px solid var(--border);
+  padding: 0.55rem 0.7rem;
+  text-align: left;
+}
+
+.prose th {
+  background: var(--bg-muted);
+}
+
+.prose hr {
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: var(--space-8) 0;
+}
+
+.prose img,
+.prose .figure {
+  margin: var(--space-5) 0;
+}
+
+.prose figcaption {
+  margin-top: var(--space-2);
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+  text-align: center;
+}
+
+.prose .footnote-definition {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}

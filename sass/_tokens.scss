@@ -1,0 +1,85 @@
+:root {
+  --font-sans: "Segoe UI", "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", "Cascadia Code", "Consolas", ui-monospace, monospace;
+  --font-display: "Segoe UI", "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+
+  --text-xs: 0.8125rem;
+  --text-sm: 0.9375rem;
+  --text-base: 1.0625rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.5rem;
+  --text-2xl: 2rem;
+  --text-3xl: clamp(2.25rem, 4vw, 3rem);
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-8: 3rem;
+  --space-10: 4.5rem;
+
+  --radius: 0.5rem;
+  --radius-lg: 0.875rem;
+  --max-width: 72rem;
+  --narrow: 42rem;
+  --header-h: 4rem;
+
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --focus-ring: 0 0 0 3px color-mix(in srgb, var(--accent) 45%, transparent);
+
+  color-scheme: light;
+  --bg: #f7f8fa;
+  --bg-elevated: #ffffff;
+  --bg-muted: #eef1f5;
+  --text: #0f172a;
+  --text-muted: #475569;
+  --border: #d8dee8;
+  --accent: #0b6e4f;
+  --accent-hover: #095c42;
+  --accent-soft: #d8f3e7;
+  --danger: #b42318;
+  --shadow: 0 1px 2px rgb(15 23 42 / 0.06), 0 8px 24px rgb(15 23 42 / 0.06);
+  --hero-glow: radial-gradient(ellipse 80% 60% at 70% 20%, #c7f0dd 0%, transparent 55%),
+    radial-gradient(ellipse 50% 40% at 10% 80%, #dce7f8 0%, transparent 50%),
+    linear-gradient(180deg, #f7f8fa 0%, #eef2f7 100%);
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0b1220;
+  --bg-elevated: #121a2b;
+  --bg-muted: #172033;
+  --text: #e8eef7;
+  --text-muted: #9aa8bc;
+  --border: #2a364a;
+  --accent: #3dd68c;
+  --accent-hover: #62e0a2;
+  --accent-soft: #123528;
+  --danger: #f97066;
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.35), 0 12px 32px rgb(0 0 0 / 0.35);
+  --hero-glow: radial-gradient(ellipse 70% 50% at 75% 15%, #144032 0%, transparent 55%),
+    radial-gradient(ellipse 45% 35% at 15% 85%, #1a2740 0%, transparent 50%),
+    linear-gradient(180deg, #0b1220 0%, #0e1626 100%);
+}
+
+@media (prefers-color-scheme: dark) {
+  html[data-theme="system"] {
+    color-scheme: dark;
+    --bg: #0b1220;
+    --bg-elevated: #121a2b;
+    --bg-muted: #172033;
+    --text: #e8eef7;
+    --text-muted: #9aa8bc;
+    --border: #2a364a;
+    --accent: #3dd68c;
+    --accent-hover: #62e0a2;
+    --accent-soft: #123528;
+    --danger: #f97066;
+    --shadow: 0 1px 2px rgb(0 0 0 / 0.35), 0 12px 32px rgb(0 0 0 / 0.35);
+    --hero-glow: radial-gradient(ellipse 70% 50% at 75% 15%, #144032 0%, transparent 55%),
+      radial-gradient(ellipse 45% 35% at 15% 85%, #1a2740 0%, transparent 50%),
+      linear-gradient(180deg, #0b1220 0%, #0e1626 100%);
+  }
+}

@@ -1,0 +1,51 @@
+/* Resaltado de sintaxis — tema CSS de Zola (highlight_theme = "css")
+   Ajustado a fondo oscuro de bloques <pre> */
+
+.zola-code {
+  color: #e2e8f0;
+}
+
+.zola-code .comment,
+.zola-code .punctuation.definition.comment {
+  color: #8b9bb4;
+  font-style: italic;
+}
+
+.zola-code .string,
+.zola-code .string.quoted {
+  color: #7ee2a8;
+}
+
+.zola-code .constant.numeric,
+.zola-code .constant.language {
+  color: #f0b429;
+}
+
+.zola-code .keyword,
+.zola-code .storage {
+  color: #7dd3fc;
+}
+
+.zola-code .entity.name.function,
+.zola-code .support.function {
+  color: #c4b5fd;
+}
+
+.zola-code .entity.name.class,
+.zola-code .entity.name.type,
+.zola-code .support.class {
+  color: #fda4af;
+}
+
+.zola-code .variable,
+.zola-code .variable.other {
+  color: #e2e8f0;
+}
+
+.zola-code .meta.preprocessor {
+  color: #f9a8d4;
+}
+
+.zola-code .invalid {
+  color: #fb7185;
+}

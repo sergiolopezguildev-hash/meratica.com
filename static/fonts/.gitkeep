@@ -1,0 +1,7 @@
+# Coloca aquí fuentes autoalojadas (woff2 preferible).
+# Ejemplo de uso en Sass:
+# @font-face {
+#   font-family: "MiFuente";
+#   src: url("/fonts/mifuente.woff2") format("woff2");
+#   font-display: swap;
+# }
