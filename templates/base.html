@@ -24,12 +24,12 @@
     </button>
   {% endif %}
 
-  <script src="{{ get_url(path='js/main.js') }}" defer></script>
+  <script src="/js/main.js" defer></script>
   {% if config.extra.enable_search %}
-    <script src="{{ get_url(path='js/search.js') }}" defer></script>
+    <script src="/js/search.js" defer></script>
   {% endif %}
   {% if config.extra.enable_code_copy %}
-    <script src="{{ get_url(path='js/code-copy.js') }}" defer></script>
+    <script src="/js/code-copy.js" defer></script>
   {% endif %}
   {% block scripts %}{% endblock scripts %}
 </body>

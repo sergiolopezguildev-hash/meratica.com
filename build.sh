@@ -16,8 +16,15 @@ main() {
 
   echo "Usando: $($ZOLA_BIN --version)"
 
-  if [ -n "${CF_PAGES_URL:-}" ] && [ "${CF_PAGES_BRANCH:-main}" != "main" ]; then
-    echo "Build preview → ${CF_PAGES_URL}"
+  # Prioridad de base_url:
+  # 1) BASE_URL (variable en Cloudflare Dashboard)
+  # 2) CF_PAGES_URL (previews de Pages)
+  # 3) zola.toml (producción con dominio propio)
+  if [ -n "${BASE_URL:-}" ]; then
+    echo "Build con BASE_URL=${BASE_URL}"
+    "$ZOLA_BIN" build --base-url "$BASE_URL"
+  elif [ -n "${CF_PAGES_URL:-}" ]; then
+    echo "Build con CF_PAGES_URL=${CF_PAGES_URL}"
     "$ZOLA_BIN" build --base-url "$CF_PAGES_URL"
   else
     "$ZOLA_BIN" build
