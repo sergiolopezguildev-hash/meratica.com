@@ -13,7 +13,7 @@ Blog con taxonomías, RSS, búsqueda local, modo claro/oscuro, SEO, cabeceras de
 | Sass compilado por Zola | Organización modular sin bundler |
 | JS mínimo | Tema, menú, búsqueda, copiar código, volver arriba |
 | Giscus | Comentarios sin servidor propio |
-| Cloudflare Pages | Build en CI + CDN global; `public/` fuera de Git |
+| Cloudflare Pages | Build en el edge + CDN global; `public/` fuera de Git |
 | `_headers` | CSP y políticas de seguridad en el edge |
 
 ## Requisitos
@@ -85,8 +85,7 @@ zola build
 │   ├── _headers         # Seguridad Cloudflare
 │   └── _redirects
 ├── docs/                # Guías (Giscus, Cloudflare)
-├── themes/              # Reserva (sin tema externo)
-└── .github/workflows/   # CI de verificación
+└── themes/              # Reserva (sin tema externo)
 ```
 
 ## Crear contenido
@@ -217,7 +216,7 @@ HSTS: descomentar cuando el dominio propio sirva HTTPS de forma estable.
 
 1. Lee el [changelog](https://github.com/getzola/zola/blob/master/CHANGELOG.md).
 2. Actualiza el binario local.
-3. Ajusta `ZOLA_VERSION` en Cloudflare y en `.github/workflows/ci.yml`.
+3. Ajusta `ZOLA_VERSION` en Cloudflare Pages.
 4. Ejecuta `zola build` y corrige avisos.
 
 ## Licencia
