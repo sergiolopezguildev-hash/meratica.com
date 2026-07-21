@@ -101,17 +101,17 @@ og_image = "/img/og-default.png"
 twitter_site = "@meratica"
 twitter_creator = "@meratica"
 
-# --- Giscus: docs/giscus.md — enabled = true + IDs de giscus.app ---
+# --- Giscus (comentarios). El repo DEBE ser público para que Giscus funcione. ---
 [extra.giscus]
-enabled = false
-repo = "USUARIO/REPO-COMENTARIOS"
-repo_id = "R_xxxxxxxx"
-category = "Announcements"
-category_id = "DIC_xxxxxxxx"
+enabled = true
+repo = "sergiolopezguildev-hash/meratica.com"
+repo_id = "R_kgDOTfRq7A"
+category = "Comentarios del blog"
+category_id = "DIC_kwDOTfRq7M4DBqkZ"
 mapping = "pathname"
 reactions_enabled = "1"
 emit_metadata = "0"
-input_position = "top"
+input_position = "bottom"
 theme = "preferred_color_scheme"
 lang = "es"
 loading = "lazy"
