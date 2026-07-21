@@ -2,7 +2,7 @@
 {% set wpm = config.extra.words_per_minute | default(value=200) %}
 {% set minutes = (page.word_count / wpm) | round(method="ceil") %}
 {% if minutes < 1 %}{% set minutes = 1 %}{% endif %}
-{{ minutes }} min de lectura
+{{ minutes }} {{ trans(key="reading_time", lang=lang) }}
 {% endmacro reading_time %}
 
 {% macro post_meta(page) %}
@@ -18,7 +18,7 @@
     <span aria-hidden="true">·</span>
     <span class="post-cats">
       {% for cat in page.taxonomies.categories %}
-        <a href="/categories/{{ cat | slugify }}/">{{ cat }}</a>{% if not loop.last %}, {% endif %}
+        <a href="{% if lang == 'en' %}/en{% endif %}/categories/{{ cat | slugify }}/">{{ cat }}</a>{% if not loop.last %}, {% endif %}
       {% endfor %}
     </span>
   {% endif %}
@@ -37,7 +37,7 @@
   {% if page.taxonomies.tags %}
     <ul class="tag-list" aria-label="Etiquetas">
       {% for tag in page.taxonomies.tags %}
-        <li><a href="/tags/{{ tag | slugify }}/">#{{ tag }}</a></li>
+        <li><a href="{% if lang == 'en' %}/en{% endif %}/tags/{{ tag | slugify }}/">#{{ tag }}</a></li>
       {% endfor %}
     </ul>
   {% endif %}
@@ -46,20 +46,20 @@
 
 {% macro pagination(paginator) %}
 {% if paginator.number_pagers > 1 %}
-<nav class="pagination" aria-label="Paginación">
+<nav class="pagination" aria-label="{{ trans(key='pagination_status', lang=lang) }}">
   <ul>
     {% if paginator.previous %}
-      <li><a href="{{ paginator.previous }}" rel="prev">← Anterior</a></li>
+      <li><a href="{{ paginator.previous }}" rel="prev">{{ trans(key="pagination_prev", lang=lang) }}</a></li>
     {% else %}
-      <li><span class="disabled" aria-disabled="true">← Anterior</span></li>
+      <li><span class="disabled" aria-disabled="true">{{ trans(key="pagination_prev", lang=lang) }}</span></li>
     {% endif %}
     <li class="pagination-status">
-      Página {{ paginator.current_index }} de {{ paginator.number_pagers }}
+      {{ trans(key="pagination_status", lang=lang) }} {{ paginator.current_index }} {{ trans(key="pagination_of", lang=lang) }} {{ paginator.number_pagers }}
     </li>
     {% if paginator.next %}
-      <li><a href="{{ paginator.next }}" rel="next">Siguiente →</a></li>
+      <li><a href="{{ paginator.next }}" rel="next">{{ trans(key="pagination_next", lang=lang) }}</a></li>
     {% else %}
-      <li><span class="disabled" aria-disabled="true">Siguiente →</span></li>
+      <li><span class="disabled" aria-disabled="true">{{ trans(key="pagination_next", lang=lang) }}</span></li>
     {% endif %}
   </ul>
 </nav>

@@ -91,9 +91,32 @@
   background: color-mix(in srgb, var(--bar-text) 14%, transparent);
 }
 
-.nav-actions {
-  display: flex;
+.lang-switcher {
+  display: inline-flex;
+  align-items: center;
   gap: 0.25rem;
+  margin-right: 0.35rem;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.lang-link {
+  color: color-mix(in srgb, var(--bar-text) 75%, transparent);
+  text-decoration: none;
+  padding: 0.2rem 0.35rem;
+  border-radius: 0.3rem;
+}
+
+.lang-link:hover,
+.lang-link.is-active {
+  color: var(--bar-text);
+  background: color-mix(in srgb, var(--bar-text) 14%, transparent);
+}
+
+.lang-sep {
+  opacity: 0.45;
+  color: var(--bar-text);
 }
 
 .nav-actions .icon-btn {

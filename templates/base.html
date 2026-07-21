@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="{{ config.extra.language_code | default(value='es') }}" data-theme="{{ config.extra.default_theme | default(value='system') }}">
+<html lang="{{ lang }}" data-theme="{{ config.extra.default_theme | default(value='system') }}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   {% include "partials/head.html" %}
 </head>
 <body>
-  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <a class="skip-link" href="#contenido">{{ trans(key="skip_content", lang=lang) }}</a>
 
   {% include "partials/header.html" %}
 
@@ -17,7 +17,7 @@
   {% include "partials/footer.html" %}
 
   {% if config.extra.enable_back_to_top %}
-    <button type="button" class="back-to-top" id="back-to-top" aria-label="Volver arriba" hidden>
+    <button type="button" class="back-to-top" id="back-to-top" aria-label="{{ trans(key='back_to_top', lang=lang) }}" hidden>
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
         <path d="M12 19V5M5 12l7-7 7 7"/>
       </svg>
@@ -29,7 +29,7 @@
     <script src="/js/search.js" defer></script>
   {% endif %}
   {% if config.extra.enable_code_copy %}
-    <script src="/js/code-copy.js" defer></script>
+    <script src="/js/code-copy.js" defer data-copy-label="{{ trans(key='copy_code', lang=lang) }}" data-copied-label="{{ trans(key='copied_code', lang=lang) }}"></script>
   {% endif %}
   {% block scripts %}{% endblock scripts %}
 </body>

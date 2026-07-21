@@ -1,0 +1,24 @@
+<nav class="lang-switcher" aria-label="{{ trans(key='lang_label', lang=lang) }}">
+  {% set es_url = "/" %}
+  {% set en_url = "/en/" %}
+
+  {% if page and page.translations %}
+    {% for t in page.translations %}
+      {% if t.lang == "es" %}{% set_global es_url = t.permalink %}{% endif %}
+      {% if t.lang == "en" %}{% set_global en_url = t.permalink %}{% endif %}
+    {% endfor %}
+    {% if lang == "es" %}{% set_global es_url = page.permalink %}{% endif %}
+    {% if lang == "en" %}{% set_global en_url = page.permalink %}{% endif %}
+  {% elif section and section.translations %}
+    {% for t in section.translations %}
+      {% if t.lang == "es" %}{% set_global es_url = t.permalink %}{% endif %}
+      {% if t.lang == "en" %}{% set_global en_url = t.permalink %}{% endif %}
+    {% endfor %}
+    {% if lang == "es" %}{% set_global es_url = section.permalink %}{% endif %}
+    {% if lang == "en" %}{% set_global en_url = section.permalink %}{% endif %}
+  {% endif %}
+
+  <a href="{{ es_url }}" class="lang-link{% if lang == 'es' %} is-active{% endif %}" hreflang="es" {% if lang == "es" %}aria-current="true"{% endif %}>{{ trans(key="lang_es", lang=lang) }}</a>
+  <span class="lang-sep" aria-hidden="true">/</span>
+  <a href="{{ en_url }}" class="lang-link{% if lang == 'en' %} is-active{% endif %}" hreflang="en" {% if lang == "en" %}aria-current="true"{% endif %}>{{ trans(key="lang_en", lang=lang) }}</a>
+</nav>

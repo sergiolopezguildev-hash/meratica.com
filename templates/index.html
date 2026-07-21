@@ -10,8 +10,8 @@
       <p class="hero-lead">{{ section.description }}</p>
     {% endif %}
     <div class="hero-actions">
-      <a class="btn btn-primary" href="/blog/">Leer el blog</a>
-      <a class="btn btn-ghost" href="/proyectos/">Ver proyectos</a>
+      <a class="btn btn-primary" href="{% if lang == 'en' %}/en/blog/{% else %}/blog/{% endif %}">{{ trans(key="read_blog", lang=lang) }}</a>
+      <a class="btn btn-ghost" href="{% if lang == 'en' %}/en/proyectos/{% else %}/proyectos/{% endif %}">{{ trans(key="view_projects", lang=lang) }}</a>
     </div>
   </div>
   <div class="hero-visual" aria-hidden="true">
@@ -22,17 +22,17 @@
 <section class="section">
   <div class="container">
     <header class="section-header">
-      <h2>Últimas entradas</h2>
-      <p>Notas técnicas, guías y aprendizajes.</p>
+      <h2>{{ trans(key="latest_posts", lang=lang) }}</h2>
+      <p>{{ trans(key="latest_posts_lead", lang=lang) }}</p>
     </header>
-    {% set blog = get_section(path="blog/_index.md") %}
+    {% set blog = get_section(path="blog/_index.md", lang=lang) %}
     <div class="post-list">
       {% for page in blog.pages | slice(end=3) %}
         {{ macros::post_card(page=page) }}
       {% endfor %}
     </div>
     <p class="section-more">
-      <a href="/blog/">Ver todas las entradas →</a>
+      <a href="{% if lang == 'en' %}/en/blog/{% else %}/blog/{% endif %}">{{ trans(key="all_posts", lang=lang) }}</a>
     </p>
   </div>
 </section>
@@ -40,10 +40,10 @@
 <section class="section section-muted">
   <div class="container">
     <header class="section-header">
-      <h2>Proyectos destacados</h2>
-      <p>Trabajo seleccionado y experimentos abiertos.</p>
+      <h2>{{ trans(key="featured_projects", lang=lang) }}</h2>
+      <p>{{ trans(key="featured_projects_lead", lang=lang) }}</p>
     </header>
-    {% set projects = get_section(path="proyectos/_index.md") %}
+    {% set projects = get_section(path="proyectos/_index.md", lang=lang) %}
     <div class="project-grid">
       {% for page in projects.pages | slice(end=3) %}
         <article class="project-item">

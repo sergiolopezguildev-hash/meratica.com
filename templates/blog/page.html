@@ -3,8 +3,11 @@
 
 {% block content %}
 <article class="page container article-layout">
-  {% set crumb_a = "Blog" %}
+  {% set crumb_a = trans(key="nav_blog", lang=lang) %}
   {% set crumb_a_url = "/blog/" %}
+  {% if lang == "en" %}
+    {% set crumb_a_url = "/en/blog/" %}
+  {% endif %}
   {% set crumb_b = page.title %}
   {% include "partials/breadcrumbs.html" %}
 
@@ -24,17 +27,17 @@
     </div>
 
     {% if page.taxonomies.tags %}
-      <ul class="tag-list" aria-label="Etiquetas">
+      <ul class="tag-list" aria-label="{{ trans(key='tags', lang=lang) }}">
         {% for tag in page.taxonomies.tags %}
-          <li><a href="/tags/{{ tag | slugify }}/">#{{ tag }}</a></li>
+          <li><a href="{% if lang == 'en' %}/en{% endif %}/tags/{{ tag | slugify }}/">#{{ tag }}</a></li>
         {% endfor %}
       </ul>
     {% endif %}
 
-    <nav class="post-nav" aria-label="Navegación entre artículos">
+    <nav class="post-nav" aria-label="{{ trans(key='nav_blog', lang=lang) }}">
       {% if page.lower %}
         <a class="post-nav-prev" href="{{ page.lower.path }}" rel="prev">
-          <span class="post-nav-label">Anterior</span>
+          <span class="post-nav-label">{{ trans(key="prev_label", lang=lang) }}</span>
           <span class="post-nav-title">{{ page.lower.title }}</span>
         </a>
       {% else %}
@@ -42,7 +45,7 @@
       {% endif %}
       {% if page.higher %}
         <a class="post-nav-next" href="{{ page.higher.path }}" rel="next">
-          <span class="post-nav-label">Siguiente</span>
+          <span class="post-nav-label">{{ trans(key="next_label", lang=lang) }}</span>
           <span class="post-nav-title">{{ page.higher.title }}</span>
         </a>
       {% endif %}

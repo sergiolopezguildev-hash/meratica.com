@@ -1,6 +1,6 @@
 {% if page.toc and (page.extra.toc | default(value=config.extra.enable_toc)) %}
 <aside class="toc" aria-labelledby="toc-title">
-  <h2 id="toc-title" class="toc-title">Índice</h2>
+  <h2 id="toc-title" class="toc-title">{{ trans(key="toc_title", lang=lang) }}</h2>
   <nav>
     <ul>
       {% for h1 in page.toc %}

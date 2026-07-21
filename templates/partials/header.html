@@ -1,6 +1,11 @@
+{% set nav_items = config.extra.nav %}
+{% if lang == "en" %}
+  {% set nav_items = config.extra.nav_en %}
+{% endif %}
+
 <header class="site-header">
   <div class="container header-inner">
-    <a class="brand" href="/" aria-label="{{ config.title }} — inicio">
+    <a class="brand" href="{% if lang == 'en' %}/en/{% else %}/{% endif %}" aria-label="{{ config.title }} — {{ trans(key='nav_home', lang=lang) }}">
       <span class="brand-mark" aria-hidden="true">M</span>
       <span class="brand-name">{{ config.title }}</span>
     </a>
@@ -11,42 +16,44 @@
       id="nav-toggle"
       aria-controls="site-nav"
       aria-expanded="false"
-      aria-label="Abrir menú de navegación"
+      aria-label="{{ trans(key='menu_open', lang=lang) }}"
     >
       <span class="nav-toggle-bar" aria-hidden="true"></span>
       <span class="nav-toggle-bar" aria-hidden="true"></span>
       <span class="nav-toggle-bar" aria-hidden="true"></span>
     </button>
 
-    <nav id="site-nav" class="site-nav" aria-label="Principal">
+    <nav id="site-nav" class="site-nav" aria-label="{{ trans(key='nav_home', lang=lang) }}">
       <ul class="nav-list">
-        {% for item in config.extra.nav %}
+        {% for item in nav_items %}
           {% set current = false %}
           {% if current_path %}
-            {% if item.url == "/" and current_path == "/" %}
+            {% if (item.url == "/" and current_path == "/") or (item.url == "/en/" and current_path == "/en/") %}
               {% set_global current = true %}
-            {% elif item.url != "/" and current_path is starting_with(item.url) %}
+            {% elif item.url != "/" and item.url != "/en/" and current_path is starting_with(item.url) %}
               {% set_global current = true %}
             {% endif %}
           {% endif %}
           <li>
             <a href="{{ item.url }}" {% if current %}aria-current="page"{% endif %}>
-              {{ item.name }}
+              {{ trans(key=item.key, lang=lang) }}
             </a>
           </li>
         {% endfor %}
       </ul>
 
       <div class="nav-actions">
+        {% include "partials/lang-switcher.html" %}
+
         {% if config.extra.enable_search %}
-          <button type="button" class="icon-btn" id="search-open" aria-label="Abrir búsqueda" aria-controls="search-dialog" aria-expanded="false">
+          <button type="button" class="icon-btn" id="search-open" aria-label="{{ trans(key='search_open', lang=lang) }}" aria-controls="search-dialog" aria-expanded="false">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
               <circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>
             </svg>
           </button>
         {% endif %}
         {% if config.extra.enable_theme_toggle %}
-          <button type="button" class="icon-btn" id="theme-toggle" aria-label="Cambiar tema claro u oscuro">
+          <button type="button" class="icon-btn" id="theme-toggle" aria-label="{{ trans(key='theme_toggle', lang=lang) }}">
             <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
               <circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
             </svg>

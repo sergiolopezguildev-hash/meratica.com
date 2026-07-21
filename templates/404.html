@@ -3,11 +3,11 @@
 {% block content %}
 <section class="error-page container narrow">
   <p class="error-code">404</p>
-  <h1>Página no encontrada</h1>
-  <p>La URL que buscas no existe o se ha movido. Prueba con el blog o vuelve al inicio.</p>
+  <h1>{{ trans(key="not_found_title", lang=lang) }}</h1>
+  <p>{{ trans(key="not_found_text", lang=lang) }}</p>
   <div class="hero-actions">
-    <a class="btn btn-primary" href="/">Ir al inicio</a>
-    <a class="btn btn-ghost" href="/blog/">Ir al blog</a>
+    <a class="btn btn-primary" href="{% if lang == 'en' %}/en/{% else %}/{% endif %}">{{ trans(key="not_found_home", lang=lang) }}</a>
+    <a class="btn btn-ghost" href="{% if lang == 'en' %}/en/blog/{% else %}/blog/{% endif %}">{{ trans(key="not_found_blog", lang=lang) }}</a>
   </div>
 </section>
 {% endblock content %}

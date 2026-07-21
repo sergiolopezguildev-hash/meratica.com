@@ -1,10 +1,8 @@
 # =============================================================================
 # Meratica.com — Configuración de Zola
-# Documentación: https://www.getzola.org/documentation/getting-started/configuration/
 # =============================================================================
 
-# URL canónica (SEO/canonical/OG). Con Worker solo-assets no hay variables de entorno.
-# Cuando tengas dominio propio, cámbiala a https://meratica.com
+# URL canónica. Cuando tengas dominio propio: https://meratica.com
 base_url = "https://meratica.sergio-lopez-guil-dev.workers.dev"
 title = "Meratica"
 description = "Sitio personal de Meratica: blog técnico, proyectos y notas sobre software, web estática y DevOps."
@@ -28,7 +26,7 @@ include_title = true
 include_description = true
 include_path = true
 include_content = true
-index_format = "elasticlunr_json"
+index_format = "fuse_json"
 
 [markdown]
 render_emoji = false
@@ -41,7 +39,6 @@ lazy_async_image = true
 github_alerts = true
 
 [markdown.highlighting]
-# Zola 0.22+: theme obligatorio; style = "inline" | "class"
 style = "inline"
 theme = "nord"
 error_on_missing_language = false
@@ -55,36 +52,155 @@ anchors = "on"
 internal_level = "warn"
 external_level = "warn"
 
+# --- Textos de interfaz (español = idioma por defecto) ---
+[translations]
+nav_home = "Inicio"
+nav_about = "Quién soy"
+nav_blog = "Blog"
+nav_projects = "Proyectos"
+nav_contact = "Contacto"
+skip_content = "Saltar al contenido"
+search_open = "Abrir búsqueda"
+search_close = "Cerrar búsqueda"
+search_title = "Buscar en el sitio"
+search_placeholder = "Buscar artículos…"
+search_hint = "Escribe al menos 2 caracteres. Atajo: /"
+theme_toggle = "Cambiar tema claro u oscuro"
+menu_open = "Abrir menú de navegación"
+menu_close = "Cerrar menú de navegación"
+back_to_top = "Volver arriba"
+reading_time = "min de lectura"
+related_title = "Artículos relacionados"
+comments_title = "Comentarios"
+comments_note = "Los comentarios usan Giscus (GitHub Discussions). No hay backend propio."
+comments_noscript = "Para comentar necesitas JavaScript y una cuenta de GitHub."
+toc_title = "Índice"
+prev_label = "Anterior"
+next_label = "Siguiente"
+pagination_prev = "← Anterior"
+pagination_next = "Siguiente →"
+pagination_status = "Página"
+pagination_of = "de"
+latest_posts = "Últimas entradas"
+latest_posts_lead = "Notas técnicas, guías y aprendizajes."
+all_posts = "Ver todas las entradas →"
+featured_projects = "Proyectos destacados"
+featured_projects_lead = "Trabajo seleccionado y experimentos abiertos."
+read_blog = "Leer el blog"
+view_projects = "Ver proyectos"
+footer_home = "Inicio"
+breadcrumbs_home = "Inicio"
+lang_label = "Idioma"
+lang_es = "ES"
+lang_en = "EN"
+not_found_title = "Página no encontrada"
+not_found_text = "La URL que buscas no existe o se ha movido. Prueba con el blog o vuelve al inicio."
+not_found_home = "Ir al inicio"
+not_found_blog = "Ir al blog"
+feed_atom = "Atom"
+feed_rss = "RSS"
+categories = "Categorías"
+tags = "Etiquetas"
+copy_code = "Copiar"
+copied_code = "Copiado"
+
+# --- Inglés ---
+[languages.en]
+title = "Meratica"
+description = "Meratica's personal site: technical blog, projects and notes on software, static websites and DevOps."
+generate_feeds = true
+feed_filenames = ["atom.xml", "rss.xml"]
+build_search_index = true
+taxonomies = [
+    { name = "categories", feed = true, paginate_by = 6 },
+    { name = "tags", feed = true, paginate_by = 6 },
+]
+
+[languages.en.translations]
+nav_home = "Home"
+nav_about = "About"
+nav_blog = "Blog"
+nav_projects = "Projects"
+nav_contact = "Contact"
+skip_content = "Skip to content"
+search_open = "Open search"
+search_close = "Close search"
+search_title = "Search the site"
+search_placeholder = "Search articles…"
+search_hint = "Type at least 2 characters. Shortcut: /"
+theme_toggle = "Toggle light or dark theme"
+menu_open = "Open navigation menu"
+menu_close = "Close navigation menu"
+back_to_top = "Back to top"
+reading_time = "min read"
+related_title = "Related articles"
+comments_title = "Comments"
+comments_note = "Comments use Giscus (GitHub Discussions). No custom backend."
+comments_noscript = "Comments need JavaScript and a GitHub account."
+toc_title = "Contents"
+prev_label = "Previous"
+next_label = "Next"
+pagination_prev = "← Previous"
+pagination_next = "Next →"
+pagination_status = "Page"
+pagination_of = "of"
+latest_posts = "Latest posts"
+latest_posts_lead = "Technical notes, guides and learnings."
+all_posts = "View all posts →"
+featured_projects = "Featured projects"
+featured_projects_lead = "Selected work and open experiments."
+read_blog = "Read the blog"
+view_projects = "View projects"
+footer_home = "Home"
+breadcrumbs_home = "Home"
+lang_label = "Language"
+lang_es = "ES"
+lang_en = "EN"
+not_found_title = "Page not found"
+not_found_text = "The URL you requested does not exist or has moved. Try the blog or go home."
+not_found_home = "Go home"
+not_found_blog = "Go to the blog"
+feed_atom = "Atom"
+feed_rss = "RSS"
+categories = "Categories"
+tags = "Tags"
+copy_code = "Copy"
+copied_code = "Copied"
+
 [extra]
-# --- Identidad del sitio ---
 author_name = "Meratica"
 author_email = "hola@meratica.com"
 author_bio = "Desarrollador interesado en software simple, rendimiento y sitios estáticos."
 language_code = "es"
 copyright_year = "2026"
 footer_text = "Hecho con Zola. 100 % estático."
+footer_text_en = "Built with Zola. 100% static."
 
-# --- Navegación principal (editable sin tocar plantillas) ---
+# Rutas de navegación (sin idioma; el prefijo /en/ se añade en plantillas)
 nav = [
-    { name = "Inicio", url = "/", key = "home" },
-    { name = "Quién soy", url = "/quien-soy/", key = "about" },
-    { name = "Blog", url = "/blog/", key = "blog" },
-    { name = "Proyectos", url = "/proyectos/", key = "projects" },
-    { name = "Contacto", url = "/contacto/", key = "contact" },
+    { key = "nav_home", url = "/" },
+    { key = "nav_about", url = "/quien-soy/" },
+    { key = "nav_blog", url = "/blog/" },
+    { key = "nav_projects", url = "/proyectos/" },
+    { key = "nav_contact", url = "/contacto/" },
 ]
 
-# --- Redes / perfiles ---
+# Rutas equivalentes en inglés (mismo orden que nav)
+nav_en = [
+    { key = "nav_home", url = "/en/" },
+    { key = "nav_about", url = "/en/quien-soy/" },
+    { key = "nav_blog", url = "/en/blog/" },
+    { key = "nav_projects", url = "/en/proyectos/" },
+    { key = "nav_contact", url = "/en/contacto/" },
+]
+
 social = [
-    { name = "GitHub", url = "https://github.com/meratica", icon = "github" },
+    { name = "GitHub", url = "https://github.com/sergiolopezguildev-hash/meratica.com", icon = "github" },
     { name = "RSS", url = "/atom.xml", icon = "rss" },
 ]
 
-# --- Tema ---
-# system | light | dark
 default_theme = "system"
 enable_theme_toggle = true
-
-# --- Funciones opcionales ---
 enable_toc = true
 enable_back_to_top = true
 enable_code_copy = true
@@ -95,13 +211,10 @@ enable_related_posts = true
 related_posts_count = 3
 words_per_minute = 200
 enable_katex = false
-
-# --- SEO / redes ---
 og_image = "/img/og-default.png"
 twitter_site = "@meratica"
 twitter_creator = "@meratica"
 
-# --- Giscus (comentarios). El repo DEBE ser público para que Giscus funcione. ---
 [extra.giscus]
 enabled = true
 repo = "sergiolopezguildev-hash/meratica.com"

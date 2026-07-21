@@ -1,8 +1,8 @@
-{% set blog = get_section(path="blog/_index.md") %}
+{% set blog = get_section(path="blog/_index.md", lang=lang) %}
 {% if blog and config.extra.enable_related_posts %}
   {% set count = config.extra.related_posts_count | default(value=3) %}
   <section class="related-posts" aria-labelledby="related-title">
-    <h2 id="related-title">Artículos relacionados</h2>
+    <h2 id="related-title">{{ trans(key="related_title", lang=lang) }}</h2>
     <ul class="related-list related-list-limit" style="--related-limit: {{ count }}">
       {% for p in blog.pages %}
         {% if p.permalink != page.permalink %}

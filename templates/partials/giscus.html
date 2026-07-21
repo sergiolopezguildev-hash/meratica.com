@@ -1,7 +1,7 @@
 {% if config.extra.giscus and config.extra.giscus.enabled %}
 <section class="comments" id="comentarios" aria-labelledby="comments-title">
-  <h2 id="comments-title">Comentarios</h2>
-  <p class="comments-note">Los comentarios usan <a href="https://giscus.app" rel="noopener noreferrer" target="_blank">Giscus</a> (GitHub Discussions). No hay backend propio.</p>
+  <h2 id="comments-title">{{ trans(key="comments_title", lang=lang) }}</h2>
+  <p class="comments-note">{{ trans(key="comments_note", lang=lang) }}</p>
   <div class="giscus"></div>
   <script
     src="https://giscus.app/client.js"
@@ -15,13 +15,13 @@
     data-emit-metadata="{{ config.extra.giscus.emit_metadata | default(value='0') }}"
     data-input-position="{{ config.extra.giscus.input_position | default(value='bottom') }}"
     data-theme="{{ config.extra.giscus.theme | default(value='preferred_color_scheme') }}"
-    data-lang="{{ config.extra.giscus.lang | default(value='es') }}"
+    data-lang="{{ lang }}"
     data-loading="{{ config.extra.giscus.loading | default(value='lazy') }}"
     crossorigin="anonymous"
     async
   ></script>
   <noscript>
-    <p>Para comentar necesitas JavaScript y una cuenta de GitHub.</p>
+    <p>{{ trans(key="comments_noscript", lang=lang) }}</p>
   </noscript>
 </section>
 {% endif %}

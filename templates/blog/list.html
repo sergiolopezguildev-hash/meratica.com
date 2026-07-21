@@ -4,7 +4,7 @@
 {% block content %}
 <section class="section">
   <div class="container">
-    {% set crumb_a = "Blog" %}
+    {% set crumb_a = trans(key="nav_blog", lang=lang) %}
     {% include "partials/breadcrumbs.html" %}
 
     <header class="section-header">
@@ -13,13 +13,23 @@
         <p>{{ section.description }}</p>
       {% endif %}
       <p class="feed-links">
-        <a href="/atom.xml">Atom</a>
-        ·
-        <a href="/rss.xml">RSS</a>
-        ·
-        <a href="/categories/">Categorías</a>
-        ·
-        <a href="/tags/">Etiquetas</a>
+        {% if lang == "en" %}
+          <a href="/en/atom.xml">{{ trans(key="feed_atom", lang=lang) }}</a>
+          ·
+          <a href="/en/rss.xml">{{ trans(key="feed_rss", lang=lang) }}</a>
+          ·
+          <a href="/en/categories/">{{ trans(key="categories", lang=lang) }}</a>
+          ·
+          <a href="/en/tags/">{{ trans(key="tags", lang=lang) }}</a>
+        {% else %}
+          <a href="/atom.xml">{{ trans(key="feed_atom", lang=lang) }}</a>
+          ·
+          <a href="/rss.xml">{{ trans(key="feed_rss", lang=lang) }}</a>
+          ·
+          <a href="/categories/">{{ trans(key="categories", lang=lang) }}</a>
+          ·
+          <a href="/tags/">{{ trans(key="tags", lang=lang) }}</a>
+        {% endif %}
       </p>
     </header>
 

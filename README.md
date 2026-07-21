@@ -92,6 +92,13 @@ zola build
 
 ### Artículo de blog
 
+Guía sencilla (recomendada para publicar a menudo): [docs/COMO-PUBLICAR.md](docs/COMO-PUBLICAR.md).
+
+Plantillas listas para copiar:
+
+- [docs/plantillas/articulo-blog.md](docs/plantillas/articulo-blog.md)
+- [docs/plantillas/proyecto.md](docs/plantillas/proyecto.md)
+
 Crea `content/blog/mi-articulo.md`:
 
 ```toml
@@ -104,16 +111,18 @@ categories = ["Web"]
 tags = ["zola", "ejemplo"]
 [extra]
 toc = true
-# katex = true
-# og_image = "/img/mi-og.png"
 +++
 
 Contenido en Markdown…
 ```
 
+### Inglés (opcional)
+
+Añade el mismo nombre con `.en.md`, por ejemplo `mi-articulo.en.md` → `/en/blog/mi-articulo/`.
+
 ### Página
 
-Crea un Markdown en la raíz de `content/`, por ejemplo `content/quien-soy.md` → `/quien-soy/`.
+Crea un Markdown en la raíz de `content/`, por ejemplo `content/quien-soy.md` → `/quien-soy/` (y `quien-soy.en.md` → `/en/quien-soy/`).
 
 ### Proyecto
 
@@ -127,17 +136,14 @@ Preferencia AVIF → WebP → JPG/PNG. Shortcode:
 {{ figure(src="img/foto.jpg", webp="img/foto.webp", avif="img/foto.avif", alt="Descripción", caption="Pie") }}
 ```
 
-## Funcionalidades
+## Multiidioma
 
-- Blog: categorías, etiquetas, paginación, TOC, lectura estimada, prev/next, relacionados, RSS/Atom
-- Búsqueda local (`/` o icono)
-- Modo claro / oscuro / sistema
-- Copiar bloques de código
-- Breadcrumbs, skip link, foco visible
-- Sitemap, robots.txt, Open Graph, Twitter Cards, JSON-LD
-- KaTeX opcional por página (`extra.katex = true`)
-- Manifest PWA ligero
-- Giscus (desactivado hasta configurar IDs)
+- Español (por defecto): `/`
+- Inglés: `/en/`
+- Selector **ES / EN** en la cabecera
+- Contenido EN: mismo nombre + `.en.md` (ej. `bienvenido.en.md`)
+
+Guía de publicación sencilla: [docs/COMO-PUBLICAR.md](docs/COMO-PUBLICAR.md)
 
 ## Configuración útil (`zola.toml`)
 

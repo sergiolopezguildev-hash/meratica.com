@@ -1,7 +1,7 @@
 {% if config.extra.enable_breadcrumbs %}
 <nav class="breadcrumbs" aria-label="Migas de pan">
   <ol>
-    <li><a href="/">Inicio</a></li>
+    <li><a href="{% if lang == 'en' %}/en/{% else %}/{% endif %}">{{ trans(key="breadcrumbs_home", lang=lang) }}</a></li>
     {% if crumb_a_url %}
       <li><a href="{{ crumb_a_url }}">{{ crumb_a }}</a></li>
     {% elif crumb_a %}

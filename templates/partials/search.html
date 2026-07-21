@@ -1,19 +1,20 @@
 <dialog class="search-dialog" id="search-dialog" aria-labelledby="search-title">
   <div class="search-panel">
     <div class="search-header">
-      <h2 id="search-title" class="visually-hidden">Buscar en el sitio</h2>
-      <label class="visually-hidden" for="search-input">Buscar</label>
+      <h2 id="search-title" class="visually-hidden">{{ trans(key="search_title", lang=lang) }}</h2>
+      <label class="visually-hidden" for="search-input">{{ trans(key="search_title", lang=lang) }}</label>
       <input
         type="search"
         id="search-input"
         class="search-input"
-        placeholder="Buscar artículos…"
+        placeholder="{{ trans(key='search_placeholder', lang=lang) }}"
         autocomplete="off"
         enterkeyhint="search"
+        data-lang="{{ lang }}"
       >
-      <button type="button" class="icon-btn" id="search-close" aria-label="Cerrar búsqueda">×</button>
+      <button type="button" class="icon-btn" id="search-close" aria-label="{{ trans(key='search_close', lang=lang) }}">×</button>
     </div>
-    <p class="search-hint" id="search-hint">Escribe al menos 2 caracteres. Atajo: <kbd>/</kbd></p>
-    <ul class="search-results" id="search-results" role="listbox" aria-label="Resultados"></ul>
+    <p class="search-hint" id="search-hint">{{ trans(key="search_hint", lang=lang) }}</p>
+    <ul class="search-results" id="search-results" role="listbox" aria-label="{{ trans(key='search_title', lang=lang) }}"></ul>
   </div>
 </dialog>

@@ -11,7 +11,8 @@
   let loading = null;
   let active = -1;
 
-  const candidates = ["/search_index.es.json", "/search_index.en.json", "/search_index.json"];
+  const pageLang = input.dataset.lang || document.documentElement.lang || "es";
+  const candidates = [`/search_index.${pageLang}.json`, "/search_index.es.json", "/search_index.en.json", "/search_index.json"];
 
   const extractDocs = (data) => {
     if (Array.isArray(data)) return data;
@@ -70,7 +71,7 @@
       .map((d) => {
         const title = d.title || "";
         const body = d.body || d.content || d.description || "";
-        const path = d.id || d.path || d.url || "";
+        const path = d.url || d.id || d.path || "";
         const hay = `${title} ${body} ${path}`.toLowerCase();
         const score = terms.reduce((acc, t) => acc + (hay.includes(t) ? 1 : 0), 0);
         return { title, path, score };
@@ -93,7 +94,8 @@
       a.href = item.path.startsWith("http") || item.path.startsWith("/") ? item.path : `/${item.path}`;
       a.setAttribute("role", "option");
       a.setAttribute("aria-selected", "false");
-      a.innerHTML = `<strong>${item.title || "Sin título"}</strong><span class="result-path">${item.path}</span>`;
+      const pathLabel = item.path.replace(/^https?:\/\/[^/]+/, "") || item.path;
+      a.innerHTML = `<strong>${item.title || "Sin título"}</strong><span class="result-path">${pathLabel}</span>`;
       li.appendChild(a);
       results.appendChild(li);
     });

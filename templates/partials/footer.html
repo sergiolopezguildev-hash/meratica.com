@@ -1,24 +1,41 @@
+{% set nav_items = config.extra.nav %}
+{% if lang == "en" %}
+  {% set nav_items = config.extra.nav_en %}
+{% endif %}
+{% set footer = config.extra.footer_text %}
+{% if lang == "en" %}
+  {% set footer = config.extra.footer_text_en | default(value=config.extra.footer_text) %}
+{% endif %}
+
 <footer class="site-footer">
   <div class="container footer-inner">
     <div class="footer-brand">
       <p class="footer-title">{{ config.title }}</p>
-      <p class="footer-text">{{ config.extra.footer_text | default(value="") }}</p>
+      <p class="footer-text">{{ footer }}</p>
     </div>
 
-    <nav class="footer-nav" aria-label="Pie de página">
+    <nav class="footer-nav" aria-label="{{ trans(key='nav_home', lang=lang) }}">
       <ul>
-        {% for item in config.extra.nav %}
-          <li><a href="{{ item.url }}">{{ item.name }}</a></li>
+        {% for item in nav_items %}
+          <li><a href="{{ item.url }}">{{ trans(key=item.key, lang=lang) }}</a></li>
         {% endfor %}
       </ul>
     </nav>
 
     <div class="footer-meta">
       {% if config.extra.social %}
-        <ul class="social-list" aria-label="Redes">
+        <ul class="social-list" aria-label="Social">
           {% for s in config.extra.social %}
             <li>
-              <a href="{{ s.url }}" {% if s.url is starting_with("http") %}rel="noopener noreferrer" target="_blank"{% endif %}>
+              {% set href = s.url %}
+              {% if s.icon == "rss" %}
+                {% if lang == "en" %}
+                  {% set href = "/en/atom.xml" %}
+                {% else %}
+                  {% set href = "/atom.xml" %}
+                {% endif %}
+              {% endif %}
+              <a href="{{ href }}" {% if href is starting_with("http") %}rel="noopener noreferrer" target="_blank"{% endif %}>
                 {{ s.name }}
               </a>
             </li>
@@ -28,7 +45,7 @@
       <p class="copyright">
         © {{ config.extra.copyright_year | default(value="2026") }}
         {{ config.extra.author_name | default(value=config.title) }}.
-        Licencia MIT.
+        MIT.
       </p>
     </div>
   </div>
