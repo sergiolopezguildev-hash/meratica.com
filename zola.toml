@@ -3,10 +3,9 @@
 # Documentación: https://www.getzola.org/documentation/getting-started/configuration/
 # =============================================================================
 
-# URL canónica (SEO/canonical/OG). Con Worker solo-assets NO puedes usar
-# variables de entorno en Cloudflare: edita este valor cuando tengas dominio.
-# Mientras uses *.workers.dev, los enlaces internos van root-relative (/blog/).
-base_url = "https://meratica.com"
+# URL canónica (SEO/canonical/OG). Con Worker solo-assets no hay variables de entorno.
+# Cuando tengas dominio propio, cámbiala a https://meratica.com
+base_url = "https://meratica.sergio-lopez-guil-dev.workers.dev"
 title = "Meratica"
 description = "Sitio personal de Meratica: blog técnico, proyectos y notas sobre software, web estática y DevOps."
 default_language = "es"
