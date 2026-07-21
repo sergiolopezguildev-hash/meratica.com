@@ -1,15 +1,18 @@
-# Cloudflare Workers + assets estáticos (flujo oficial Zola)
+# Cloudflare Workers + assets estáticos (Zola)
 # https://www.getzola.org/documentation/deployment/cloudflare-workers/
 #
-# En el dashboard puedes dejar el deploy command por defecto:
-#   npx wrangler deploy
-# Wrangler ejecutará [build] → build.sh → zola build → sube ./public
+# Deploy command (dashboard): npx wrangler deploy
+# Wrangler ejecuta [build] → build.sh (exige BASE_URL) → publica ./public
 
 name = "meratica"
 compatibility_date = "2026-01-01"
 
+# BASE_URL: prioridad
+# 1) Variable de entorno del entorno de build (Cloudflare / shell)
+# 2) Valor por defecto de este comando (workers.dev actual)
+# Cambia el valor por defecto cuando tengas dominio propio.
 [build]
-command = "bash ./build.sh"
+command = "BASE_URL=\"${BASE_URL:-https://meratica.sergio-lopez-guil-dev.workers.dev}\" bash ./build.sh"
 
 [assets]
 directory = "./public"

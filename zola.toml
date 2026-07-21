@@ -2,7 +2,9 @@
 # Meratica.com — Configuración de Zola
 # =============================================================================
 
-# URL canónica. Cuando tengas dominio propio: https://meratica.com
+# URL de respaldo para `zola serve` / builds locales sin script.
+# En producción y en `bash ./build.sh` manda la variable de entorno BASE_URL
+# (ver wrangler.toml, .env.example y docs/cloudflare.md).
 base_url = "https://meratica.sergio-lopez-guil-dev.workers.dev"
 title = "Meratica"
 description = "Sitio personal de Meratica: blog técnico, proyectos y notas sobre software, web estática y DevOps."

@@ -85,7 +85,7 @@ zola build
 │   ├── _headers         # Seguridad Cloudflare
 │   └── _redirects
 ├── docs/                # Guías (Giscus, Cloudflare)
-└── wrangler.toml        # Cloudflare Pages (salida: public/)
+└── wrangler.toml        # Cloudflare Workers + default BASE_URL
 ```
 
 ## Crear contenido
@@ -145,9 +145,10 @@ Preferencia AVIF → WebP → JPG/PNG. Shortcode:
 
 Guía de publicación sencilla: [docs/COMO-PUBLICAR.md](docs/COMO-PUBLICAR.md)
 
-## Configuración útil (`zola.toml`)
+## Configuración útil
 
-- `base_url` — URL canónica de producción
+- **`BASE_URL`** (variable de entorno) — URL canónica real del sitio; la usa `build.sh`
+- `zola.toml` → `base_url` — solo respaldo para `zola serve` local
 - `extra.nav` — menú
 - `extra.giscus` — comentarios
 - `extra.enable_*` — interruptores de UI
@@ -157,12 +158,13 @@ Guía de publicación sencilla: [docs/COMO-PUBLICAR.md](docs/COMO-PUBLICAR.md)
 
 Guía completa: [docs/cloudflare.md](docs/cloudflare.md).
 
-Resumen (flujo oficial Zola):
+Resumen:
 
 1. Conecta el repo en Cloudflare (Workers/Pages).
-2. Deploy command por defecto: `npx wrangler deploy`
-3. Wrangler ejecuta `build.sh` → `zola build` → publica `public/`
-4. Opcional: env `ZOLA_VERSION=0.22.1`
+2. Deploy command: `npx wrangler deploy`
+3. Wrangler ejecuta `build.sh` con **`BASE_URL`** → `zola build --base-url …` → publica `public/`
+4. El valor por defecto de `BASE_URL` está en `wrangler.toml` (`[build].command`); cámbialo al tener dominio propio
+5. Local: `cp .env.example .env` y `bash ./build.sh`
 
 No subas `public/` a Git.
 
